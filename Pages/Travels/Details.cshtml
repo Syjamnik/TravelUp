@@ -1,0 +1,43 @@
+﻿@page
+@model TravelUp.Pages.Travels.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Travel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Travel.Header)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Travel.Header)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Travel.Text)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Travel.Text)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Travel.Rating)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RatingValue)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Travel.Author.EmailAddress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Travel.Author.EmailAddress)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Travel.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
