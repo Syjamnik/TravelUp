@@ -20,18 +20,18 @@ namespace TravelUp.Pages.Users
             _db = dbUserQueries;
         }
 
-        public User User { get; set; }
+        public User UserModel { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            User = _db.Read(id.GetValueOrDefault());
+            UserModel = _db.Read(id);
 
-            if (User == null)
+            if (UserModel == null)
             {
                 return NotFound();
             }

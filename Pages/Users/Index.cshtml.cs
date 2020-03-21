@@ -20,11 +20,11 @@ namespace TravelUp.Pages.Users
             _db = dbUserQueries;
         }
 
-        public IList<User> User { get;set; }
+        public IList<User> UserModel { get;set; }
 
         public async Task OnGetAsync()
         {
-            User = await _db.ReadAll();
+            UserModel = await _db.ReadAll();
         }
     }
 }

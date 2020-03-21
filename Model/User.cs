@@ -6,10 +6,6 @@ namespace TravelUp.Model
 {
     public class User : IdentityUser
     {
-        #region istota
-        public string Name { get; set; }
-        public string EmailAddress { get; set; }
-        #endregion
 
         #region cele i osiągnięcia
         public IList<TravelUserVisitedList> OnVisitedList{ get; set; }
@@ -21,11 +17,5 @@ namespace TravelUp.Model
             OnFavouriteList= new List<TravelUserFavouriteList>();
             OnVisitedList = new List<TravelUserVisitedList>();
         }
-        public User(UserDto userDto)
-        {
-            this.Name = userDto.Name;
-            this.EmailAddress = userDto.EmailAddress;
-        }
-    
     }
 }

@@ -7,7 +7,7 @@ using TravelUp.Model;
 
 namespace TravelUp.DbQuery
 {
-    public class DbUserQueries : ICRUD<User>
+    public class DbUserQueries 
     {
         private ApplicationDbContext _dbCtx;
         public DbUserQueries(ApplicationDbContext applicationDbContext)
@@ -33,7 +33,7 @@ namespace TravelUp.DbQuery
             throw new NotImplementedException();
         }
 
-        public User Read(int id)
+        public User Read(string id)
         {
             return _dbCtx.Users.Include(c => c.OnFavouriteList)
                 .Include(c => c.OnVisitedList)
@@ -50,16 +50,15 @@ namespace TravelUp.DbQuery
         {
             var oldUser = _dbCtx.Users.Where(c => c.Id.Equals(id.ToString()))
                                       .FirstOrDefault();
-            if (oldUser != null)
+            if(oldUser != null)
             {
-                oldUser.Name = item.Name;
-                oldUser.EmailAddress= item.EmailAddress;
-
+                oldUser.OnFavouriteList = item.OnFavouriteList;
+                oldUser.OnVisitedList = item.OnVisitedList;
                 await _dbCtx.SaveChangesAsync();
+
                 return oldUser;
             }
-            else
-                return null;
+            return null;
         }
         public async Task<User> UpdateById(String id, User item)
         {
@@ -67,8 +66,8 @@ namespace TravelUp.DbQuery
                                       .FirstOrDefault();
             if (oldUser != null)
             {
-                oldUser.Name = item.Name;
-                oldUser.EmailAddress = item.EmailAddress;
+                oldUser.OnFavouriteList = item.OnFavouriteList;
+                oldUser.OnVisitedList = item.OnVisitedList;
 
                 await _dbCtx.SaveChangesAsync();
                 return oldUser;
@@ -79,7 +78,8 @@ namespace TravelUp.DbQuery
         public async Task<User> UpdateByObject(User oldItem, User newItem)
         {
             _dbCtx.Users.Update(oldItem);
-            oldItem = newItem;
+            oldItem.OnVisitedList = newItem.OnVisitedList;
+            oldItem.OnFavouriteList = newItem.OnFavouriteList;
             await _dbCtx.SaveChangesAsync();
             return oldItem;
         }

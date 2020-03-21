@@ -22,17 +22,17 @@ namespace TravelUp.Pages.Users
         }
 
         [BindProperty]
-        public User User { get; set; }
+        public User UserModel { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            User = _db.Read(id.GetValueOrDefault());
-            if (User == null)
+            UserModel = _db.Read(id);
+            if (UserModel == null)
             {
                 return NotFound();
             }
@@ -48,7 +48,7 @@ namespace TravelUp.Pages.Users
                 return Page();
             }
 
-            await _db.UpdateById(User.Id, User);
+            await _db.UpdateById(UserModel.Id, UserModel);
 
             return RedirectToPage("./Index");
         }

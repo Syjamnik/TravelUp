@@ -22,7 +22,7 @@ namespace TravelUp.Dto
         }
         public UserDto(User userToConvert)
         {
-            this.Name = userToConvert.Name;
+            this.Name = userToConvert.UserName;
             this.EmailAddress = EmailAddress; 
         }
 

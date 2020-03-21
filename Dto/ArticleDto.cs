@@ -17,15 +17,7 @@ namespace TravelUp.Dto
         {
 
         }
-        public ArticleDto(Article articleToConvert)
-        {
-            this.Header = articleToConvert.Header;
-            this.Text = articleToConvert.Text;
-            this.Created = articleToConvert.Created;
-            this.Visited = articleToConvert.Visited;
 
-            this.Author = new UserDto(articleToConvert.Author);
-        }
     }
 
 }

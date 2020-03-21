@@ -9007,11 +9007,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\KC\\Desktop\\Projekty\\TravelUp\\TravelUp.csproj",
+      "projectUniqueName": "C:\\Users\\KC\\Desktop\\Projekty\\GITHUB\\TravelUp\\TravelUp.csproj",
       "projectName": "TravelUp",
-      "projectPath": "C:\\Users\\KC\\Desktop\\Projekty\\TravelUp\\TravelUp.csproj",
+      "projectPath": "C:\\Users\\KC\\Desktop\\Projekty\\GITHUB\\TravelUp\\TravelUp.csproj",
       "packagesPath": "C:\\Users\\KC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\KC\\Desktop\\Projekty\\TravelUp\\obj\\",
+      "outputPath": "C:\\Users\\KC\\Desktop\\Projekty\\GITHUB\\TravelUp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\KC\\AppData\\Roaming\\NuGet\\NuGet.Config",
