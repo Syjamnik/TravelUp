@@ -28,9 +28,16 @@ namespace TravelUp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options => {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+            });
+
             services.AddDbContext<ApplicationDbContext>(options=> options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+           
             services.AddScoped<DbUserQueries>();
             services.AddScoped<DbTravelQueries>();
+           
             // konieczne gdy chcemy u¿ywaæ IdentityApplicationDBContext
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders()
@@ -54,9 +61,10 @@ namespace TravelUp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
