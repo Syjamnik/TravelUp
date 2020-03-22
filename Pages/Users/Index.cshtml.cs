@@ -1,11 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using TravelUp;
 using TravelUp.DbQuery;
 using TravelUp.Model;
 
@@ -20,7 +15,7 @@ namespace TravelUp.Pages.Users
             _db = dbUserQueries;
         }
 
-        public IList<User> UserModel { get;set; }
+        public IList<User> UserModel { get; set; }
 
         public async Task OnGetAsync()
         {

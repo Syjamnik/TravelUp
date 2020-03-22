@@ -18,6 +18,8 @@
   <ItemGroup>
     <Compile Include="Migrations\20200321205141_resolvingBug.cs" />
     <Compile Include="Migrations\20200321205141_resolvingBug.Designer.cs" />
+    <Compile Include="Migrations\20200322091520_changedNamesOfcolumnsAndAddedNewColumn.cs" />
+    <Compile Include="Migrations\20200322091520_changedNamesOfcolumnsAndAddedNewColumn.Designer.cs" />
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
   </ItemGroup>
 

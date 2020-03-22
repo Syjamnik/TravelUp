@@ -1,25 +1,28 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TravelUp.Model;
-using TravelUp.Dto;
-using Microsoft.AspNetCore.Identity;
 
 namespace TravelUp
 {
-    public class ApplicationDbContext: IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options ): base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
-        public DbSet<Travel> Travels { get; set; }
-        public DbSet<User> Users{ get; set; }
-        public DbSet<Rating> Ratings{ get; set; }
-        public DbSet<TravelUserFavouriteList> travelUserMTMs { get; set; }
+        public DbSet<Travel> AllTravels { get; set; }
+        public DbSet<User> AllUsers { get; set; }
+        public DbSet<Rating> AllRatings { get; set; }
+        public DbSet<TravelUserFavouriteList> TravelUserFaMTMs { get; set; }
+        public DbSet<TravelUserVisitedList> TravelUserVisMTMs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region travel
+            modelBuilder.Entity<Travel>()
+                        .ToTable("Travels");
+
             modelBuilder.Entity<Travel>()
                         .HasKey(c => c.Id);
 
@@ -37,18 +40,19 @@ namespace TravelUp
 
             #region Rating
             modelBuilder.Entity<Rating>()
+                        .ToTable("Ratings");
+
+            modelBuilder.Entity<Rating>()
                         .HasKey(c => c.Id);
             #endregion
-           
+
             #region user
-
-
             #endregion
 
             #region MTM TravelUserFavouriteList
 
             modelBuilder.Entity<TravelUserFavouriteList>()
-                .HasKey(c => new { c.TravelId, c.UserId});
+                .HasKey(c => new { c.TravelId, c.UserId });
 
             modelBuilder.Entity<TravelUserFavouriteList>()
                         .HasOne<User>(c => c.User)
@@ -75,6 +79,7 @@ namespace TravelUp
                         .WithMany(c => c.OnVisitedList)
                         .HasForeignKey(c => c.TravelId);
             #endregion
+          
             base.OnModelCreating(modelBuilder);
         }
 

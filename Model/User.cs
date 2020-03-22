@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
-using TravelUp.Dto;
 
 namespace TravelUp.Model
 {
@@ -8,14 +7,8 @@ namespace TravelUp.Model
     {
 
         #region cele i osiągnięcia
-        public IList<TravelUserVisitedList> OnVisitedList{ get; set; }
-        public IList<TravelUserFavouriteList> OnFavouriteList { get; set; }
+        public IList<TravelUserVisitedList> OnVisitedList { get; set; } = new List<TravelUserVisitedList>();
+        public IList<TravelUserFavouriteList> OnFavouriteList { get; set; } = new List<TravelUserFavouriteList>();
         #endregion
-
-        public User()
-        {
-            OnFavouriteList= new List<TravelUserFavouriteList>();
-            OnVisitedList = new List<TravelUserVisitedList>();
-        }
     }
 }

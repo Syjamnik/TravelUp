@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using TravelUp;
+using System.Threading.Tasks;
 using TravelUp.Model;
 
 namespace TravelUp.Pages.Travels
@@ -29,7 +25,7 @@ namespace TravelUp.Pages.Travels
                 return NotFound();
             }
 
-            Travel = await _context.Travels.FirstOrDefaultAsync(m => m.Id == id);
+            Travel = await _context.AllTravels.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Travel == null)
             {
@@ -45,11 +41,11 @@ namespace TravelUp.Pages.Travels
                 return NotFound();
             }
 
-            Travel = await _context.Travels.FindAsync(id);
+            Travel = await _context.AllTravels.FindAsync(id);
 
             if (Travel != null)
             {
-                _context.Travels.Remove(Travel);
+                _context.AllTravels.Remove(Travel);
                 await _context.SaveChangesAsync();
             }
 

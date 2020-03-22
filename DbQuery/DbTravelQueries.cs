@@ -7,7 +7,7 @@ using TravelUp.Model;
 
 namespace TravelUp.DbQuery
 {
-    public class DbTravelQueries : ICRUD<Travel>
+    public class DbTravelQueries : ICRUD<Travel, int>
     {
         private ApplicationDbContext _dbCtx;
         public DbTravelQueries(ApplicationDbContext dbCtx)
@@ -33,27 +33,27 @@ namespace TravelUp.DbQuery
 
         public Travel Read(int id)
         {
-            return _dbCtx.Travels.Include(c => c.Rating)
+            return _dbCtx.AllTravels.Include(c => c.Rating)
                                  .Where(t => t.Id == id)
                                  .FirstOrDefault();
         }
-        public async  Task<List<Travel>> ReadAll()
+        public async Task<List<Travel>> ReadAll()
         {
-            return await _dbCtx.Travels.Include(c => c.Rating)
+            return await _dbCtx.AllTravels.Include(c => c.Rating)
                                  .ToListAsync();
         }
         public async Task<Travel> UpdateById(int id, Travel item)
         {
-            Travel oldTravel= _dbCtx.Travels.Where(t => t.Id == id)
+            Travel oldTravel = _dbCtx.AllTravels.Where(t => t.Id == id)
                                             .FirstOrDefault();
-            
+
             if (oldTravel != null)
             {
                 oldTravel.Text = item.Text;
-                oldTravel.Header= item.Header;
+                oldTravel.Header = item.Header;
                 oldTravel.OnVisitedList = item.OnVisitedList;
-                oldTravel.OnFavouriteList= item.OnFavouriteList;
-                
+                oldTravel.OnFavouriteList = item.OnFavouriteList;
+
 
                 await _dbCtx.SaveChangesAsync();
                 return oldTravel;
@@ -64,7 +64,7 @@ namespace TravelUp.DbQuery
 
         public async Task<Travel> UpdateByObject(Travel oldItem, Travel newItem)
         {
-            _dbCtx.Travels.Update(oldItem);
+            _dbCtx.AllTravels.Update(oldItem);
             oldItem = newItem;
             await _dbCtx.SaveChangesAsync();
             return oldItem;

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using TravelUp;
+using System.Threading.Tasks;
 using TravelUp.DbQuery;
-using TravelUp.Dto;
 using TravelUp.Model;
 
 namespace TravelUp.Pages.Travels
@@ -27,7 +21,7 @@ namespace TravelUp.Pages.Travels
         }
 
         [BindProperty]
-        public TravelDto Travel { get; set; }
+        public Travel Travel { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -38,7 +32,7 @@ namespace TravelUp.Pages.Travels
                 return Page();
             }
 
-            await _db.Create(new Travel(Travel));
+            await _db.Create(Travel);
             return RedirectToPage("./Index");
         }
     }

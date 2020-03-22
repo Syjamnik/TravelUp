@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace TravelUp.Model
+﻿namespace TravelUp.Model
 {
-    public class Rating:Queryable
+    public class Rating : Queryable
     {
         public int Id { get; set; }
         public long Votes { get; set; }

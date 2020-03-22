@@ -7,7 +7,7 @@ using TravelUp.Model;
 
 namespace TravelUp.DbQuery
 {
-    public class DbUserQueries 
+    public class DbUserQueries: ICRUD<User, string>
     {
         private ApplicationDbContext _dbCtx;
         public DbUserQueries(ApplicationDbContext applicationDbContext)
@@ -23,7 +23,7 @@ namespace TravelUp.DbQuery
             return item;
         }
 
-        public Task<bool> DeleteById(int id)
+        public Task<bool> DeleteById(string id)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +35,7 @@ namespace TravelUp.DbQuery
 
         public User Read(string id)
         {
-            return _dbCtx.Users.Include(c => c.OnFavouriteList)
+            return _dbCtx.AllUsers.Include(c => c.OnFavouriteList)
                 .Include(c => c.OnVisitedList)
                 .Where(c => c.Id.Equals(id.ToString()))
                 .FirstOrDefault();
@@ -43,14 +43,14 @@ namespace TravelUp.DbQuery
 
         public async Task<List<User>> ReadAll()
         {
-            return await _dbCtx.Users.ToListAsync();
+            return await _dbCtx.AllUsers.ToListAsync();
         }
 
-        public async Task<User> UpdateById(int id, User item)
+        public async Task<User> UpdateById(string id, User item)
         {
-            var oldUser = _dbCtx.Users.Where(c => c.Id.Equals(id.ToString()))
+            var oldUser = _dbCtx.AllUsers.Where(c => c.Id.Equals(id.ToString()))
                                       .FirstOrDefault();
-            if(oldUser != null)
+            if (oldUser != null)
             {
                 oldUser.OnFavouriteList = item.OnFavouriteList;
                 oldUser.OnVisitedList = item.OnVisitedList;
@@ -59,21 +59,6 @@ namespace TravelUp.DbQuery
                 return oldUser;
             }
             return null;
-        }
-        public async Task<User> UpdateById(String id, User item)
-        {
-            var oldUser = _dbCtx.Users.Where(c => c.Id.Equals(id.ToString()))
-                                      .FirstOrDefault();
-            if (oldUser != null)
-            {
-                oldUser.OnFavouriteList = item.OnFavouriteList;
-                oldUser.OnVisitedList = item.OnVisitedList;
-
-                await _dbCtx.SaveChangesAsync();
-                return oldUser;
-            }
-            else
-                return null;
         }
         public async Task<User> UpdateByObject(User oldItem, User newItem)
         {
