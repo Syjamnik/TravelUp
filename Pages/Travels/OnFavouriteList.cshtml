@@ -1,0 +1,39 @@
+﻿@page
+@model TravelUp.Pages.Travels.OnFavouriteListModel
+@*
+    ViewData["Title"]="Favourite places";
+*@
+<h1>My favourite places:</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OnFavouriteList[0].Travel.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnFavouriteList[0].Travel.Author.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnFavouriteList[0].Travel.Header)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.OnFavouriteList)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel.Author.UserName);
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel.Header)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

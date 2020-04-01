@@ -10,7 +10,7 @@
 <h4>Travel</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Travel.Id" />
@@ -21,7 +21,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Travel.Text" class="control-label"></label>
-                <input asp-for="Travel.Text" class="form-control" />
+                <textarea asp-for="Travel.Text"  id="editor1" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor.
+            </textarea>
+                <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+                </script>
                 <span asp-validation-for="Travel.Text" class="text-danger"></span>
             </div>
             <div class="form-group">

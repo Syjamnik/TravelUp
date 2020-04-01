@@ -2,7 +2,9 @@
 {
     public static class StaticDetails
     {
-        public static string Admin = "Admin";
-        public static string User = "User";
+        public const  string Admin = "Admin";
+        public const  string User = "User";
+        public const string AdminAndUser = "Admin,User";
+
     }
 }

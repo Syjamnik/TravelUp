@@ -1,6 +1,6 @@
 ﻿@page
 @model TravelUp.Pages.Users.IndexModel
-
+@using TravelUp.Utility
 @{
     ViewData["Title"] = "Index";
 }
@@ -12,19 +12,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserModel[0].Id)
+                @Html.DisplayNameFor(model => model.UserModelList[0].Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserModel[0].UserName)
+                @Html.DisplayNameFor(model => model.UserModelList[0].UserName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserModel[0].Email)
+                @Html.DisplayNameFor(model => model.UserModelList[0].Email)
             </th>
-            <th></th>
+            <th class="float-right">
+                <a class="btn btn-primary text-white" asp-page="/Create">Create</a>
+            </th>
         </tr>
+        <tr></tr>
     </thead>
     <tbody>
-@foreach (var item in Model.UserModel) {
+@foreach (var item in Model.UserModelList) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -36,11 +39,19 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                @if (User.IsInRole(StaticDetails.Admin) || User.IsInRole(StaticDetails.User))
+                {
+                    <a class="btn btn-primary text-white" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+
+
+                }
+                @if (User.IsInRole(StaticDetails.Admin))
+                {
+                    <a class="btn btn-primary text-white " asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                }
             </td>
         </tr>
+        <tr></tr>
 }
     </tbody>
 </table>

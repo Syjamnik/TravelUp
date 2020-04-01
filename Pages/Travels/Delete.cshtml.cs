@@ -1,16 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using TravelUp.Data;
 using TravelUp.Model;
+using TravelUp.Utility;
 
 namespace TravelUp.Pages.Travels
 {
+
+    [Authorize(Roles = StaticDetails.AdminAndUser)]
     public class DeleteModel : PageModel
     {
-        private readonly TravelUp.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DeleteModel(TravelUp.ApplicationDbContext context)
+        public DeleteModel(ApplicationDbContext context)
         {
             _context = context;
         }

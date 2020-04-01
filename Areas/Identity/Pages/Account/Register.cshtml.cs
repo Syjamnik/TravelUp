@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelUp.Model;
+using TravelUp.Utility;
 
 namespace TravelUp.Areas.Identity.Pages.Account
 {
@@ -19,17 +20,20 @@ namespace TravelUp.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         /*private readonly IEmailSender _emailSender;*/
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
+            RoleManager<IdentityRole> roleManager,
             ILogger<RegisterModel> logger
             /*IEmailSender emailSender*/)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _logger = logger;
             /* _emailSender = emailSender;*/
         }
@@ -64,18 +68,35 @@ namespace TravelUp.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = new User { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 if (result.Succeeded)
                 {
+                    // utwórz role jeśli nie istnieją 
+                    if (!await  _roleManager.RoleExistsAsync(StaticDetails.Admin))
+                       await  _roleManager.CreateAsync(new IdentityRole(StaticDetails.Admin));
+
+                    if (!await  _roleManager.RoleExistsAsync(StaticDetails.User))
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.User));
+                    // twórz nowego usera jako zwykłego usera
+                    await _userManager.AddToRoleAsync(user, StaticDetails.User);
+
+
+
+
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -98,6 +119,9 @@ namespace TravelUp.Areas.Identity.Pages.Account
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
+
+
+
                 }
                 foreach (var error in result.Errors)
                 {

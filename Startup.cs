@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -5,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TravelUp.DbQuery;
+using TravelUp.Data;
+using TravelUp.Data.DbQuery;
 
 namespace TravelUp
 {
@@ -21,21 +23,36 @@ namespace TravelUp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region cookie
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddScoped<DbUserQueries>();
-            services.AddScoped<DbTravelQueries>();
+            services.PostConfigure<CookieAuthenticationOptions>(
+                IdentityConstants.ApplicationScheme,
+                opt=> {
+                    opt.LoginPath = "/identity/account/Login";
+                    opt.AccessDeniedPath = "/identity/account/AccessDenied";
+                    opt.LogoutPath = "/identity/account/Logout";
+                } 
+                );
+            #endregion
 
             // konieczne gdy chcemy u¿ywaæ IdentityApplicationDBContext
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<DbUserQueries>();
+            services.AddScoped<DbTravelQueries>();
+            services.AddScoped<DbFavouriteMTMQueries>();
+            services.AddScoped<DbVisitedMTMQueries>();
+
+
             services.AddRazorPages();
         }
 

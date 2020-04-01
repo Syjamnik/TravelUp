@@ -591,7 +591,6 @@ C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\bin\Debug\netcoreapp3
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.csprojAssemblyReference.cache
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.csproj.CoreCompileInputs.cache
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.MvcApplicationPartsAssemblyInfo.cache
@@ -617,7 +616,6 @@ C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\Disable2fa.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\DownloadPersonalData.cshtml.g.cs
-C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\Email.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.cshtml.g.cs
@@ -642,7 +640,6 @@ C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs
-C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Index.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Privacy.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_Layout.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_LoginPartial.cshtml.g.cs
@@ -653,7 +650,6 @@ C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Travels\Edit.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Travels\Index.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Users\Details.cshtml.g.cs
-C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Users\Edit.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Users\Index.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewImports.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewStart.cshtml.g.cs
@@ -666,3 +662,7 @@ C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.dll
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.pdb
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.genruntimeconfig.cache
+C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Index.cshtml.g.cs
+C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Travels\OnFavouriteList.cshtml.g.cs
+C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Travels\OnVisitedList.cshtml.g.cs
+C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.csprojAssemblyReference.cache

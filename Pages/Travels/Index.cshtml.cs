@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TravelUp.DbQuery;
+using TravelUp.Data.DbQuery;
 using TravelUp.Model;
 
 namespace TravelUp.Pages.Travels

@@ -5,37 +5,45 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
 <div>
-    <h4>Travel</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Travel.Header)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Travel.Header)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Travel.Text)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Travel.Text)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Travel.Rating)
-        </dt>
-        <dd class="col-sm-10">
+
+    <content>
+        <h1>@Html.DisplayFor(model => model.Travel.Header)</h1>
+        <hr />
+
+
+        <div>
+            @Html.Raw(Model.Travel.Text)
+        </div>
+        <hr />
+
+        <div>
+            @Html.DisplayNameFor(model => model.Travel.Rating):
             @Html.DisplayFor(model => model.RatingValue)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Travel.Author.Email)
-        </dt>
-        <dd class="col-sm-10">
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.Travel.Author.Email):
             @Html.DisplayFor(model => model.Travel.Author.Email)
-        </dd>
-    </dl>
+        </div>
+        <hr />
+
+        @{
+            var parms = new Dictionary<string, string>
+            {
+                { "id", Model.Travel.Id.ToString() },
+                { "addTo", "1" }
+            };
+
+            var parms2 = new Dictionary<string, string>
+            {
+                { "id", Model.Travel.Id.ToString() },
+                { "addTo", "2" }
+            };
+        }
+        <a class="btn btn-primary" asp-page="./Details" asp-route-id="@Model.Travel.Id" asp-all-route-data="parms">Add to Favourite list</a>
+        <a class="btn btn-primary" asp-page="./Details" asp-route-id="@Model.Travel.Id" asp-all-route-data="parms2">Add to Visited list</a>
+    </content>
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Travel.Id">Edit</a> |

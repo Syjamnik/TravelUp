@@ -1,0 +1,39 @@
+﻿@page
+@model TravelUp.Pages.Travels.OnVisitedListModel
+
+@*
+    ViewData["Title"]="Visisted places";
+*@
+<h1>My visited places:</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OnVisitedList[0].Travel.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnVisitedList[0].Travel.Author.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnVisitedList[0].Travel.Header)
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.OnVisitedList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Travel.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Travel.Author.UserName);
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Travel.Header)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

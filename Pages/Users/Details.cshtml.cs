@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
-using TravelUp.DbQuery;
+using TravelUp.Data.DbQuery;
 using TravelUp.Model;
+using TravelUp.Utility;
 
 namespace TravelUp.Pages.Users
 {
+    [Authorize(Roles = StaticDetails.User)]
     public class DetailsModel : PageModel
     {
         private readonly DbUserQueries _db;
