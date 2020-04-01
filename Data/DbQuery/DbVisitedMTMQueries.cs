@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelUp.Model;
@@ -18,6 +17,12 @@ namespace TravelUp.Data.DbQuery
             await _dbContext.TravelUserVisMTMs.AddAsync(item);
             await _dbContext.SaveChangesAsync();
         }
+
+        public List<TravelUserVisitedList> getAll(string UserId)
+        {
+            return _dbContext.TravelUserVisMTMs.Where(c => c.UserId == UserId).ToList();
+        }
+
         public async Task delete(string idUser)
         {
             var objToDelete = _dbContext.TravelUserVisMTMs.Where(c => c.UserId == idUser).FirstOrDefault();

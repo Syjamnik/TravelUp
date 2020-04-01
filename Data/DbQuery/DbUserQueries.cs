@@ -3,12 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TravelUp.Data;
 using TravelUp.Model;
 
 namespace TravelUp.Data.DbQuery
 {
-    public class DbUserQueries: ICRUD<User, string>
+    public class DbUserQueries : ICRUD<User, string>
     {
         private ApplicationDbContext _dbCtx;
         public DbUserQueries(ApplicationDbContext applicationDbContext)
@@ -42,15 +41,21 @@ namespace TravelUp.Data.DbQuery
         }
         public User Read(string id)
         {
-            return _dbCtx.AllUsers.Include(c => c.OnFavouriteList)
+            return _dbCtx.AllUsers
+                .Include(c => c.OnFavouriteList)
+                    .ThenInclude(c => c.Travel)
+                    .ThenInclude(c => c.Author)
+
                 .Include(c => c.OnVisitedList)
+                    .ThenInclude(c => c.Travel)
+                    .ThenInclude(c => c.Author)
                 .Where(c => c.Id.Equals(id.ToString()))
                 .FirstOrDefault();
         }
-
         public async Task<List<User>> ReadAll()
         {
-            return await _dbCtx.AllUsers.ToListAsync();
+            return await _dbCtx.AllUsers.Include(c => c.OnFavouriteList)
+                                        .Include(c => c.OnVisitedList).ToListAsync();
         }
 
         public async Task<User> UpdateById(string id, User item)

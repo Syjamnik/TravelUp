@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using TravelUp.Data.DbQuery;
-using TravelUp.Model;
 
 namespace TravelUp.Areas.Identity.Pages.Account.Manage
 {
@@ -13,7 +11,7 @@ namespace TravelUp.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-       /* private readonly IEmailSender _emailSender;*/
+        /* private readonly IEmailSender _emailSender;*/
         private readonly DbUserQueries _db;
 
         public IndexModel(
@@ -25,7 +23,7 @@ namespace TravelUp.Areas.Identity.Pages.Account.Manage
             _db = db;
             _userManager = userManager;
             _signInManager = signInManager;
-           /* _emailSender = emailSender;*/
+            /* _emailSender = emailSender;*/
         }
 
         public string Username { get; set; }
@@ -56,7 +54,7 @@ namespace TravelUp.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var userFromDb =  _db.Read(user.Id);
+            var userFromDb = _db.Read(user.Id);
 
             Username = userFromDb.UserName;
 
@@ -111,10 +109,10 @@ namespace TravelUp.Areas.Identity.Pages.Account.Manage
                 pageHandler: null,
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
-/*            await _emailSender.SendEmailAsync(
-                email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");*/
+            /*            await _emailSender.SendEmailAsync(
+                            email,
+                            "Confirm your email",
+                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");*/
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToPage();

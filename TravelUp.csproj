@@ -20,6 +20,14 @@
     <Compile Include="Migrations\20200321205141_resolvingBug.Designer.cs" />
     <Compile Include="Migrations\20200322091520_changedNamesOfcolumnsAndAddedNewColumn.cs" />
     <Compile Include="Migrations\20200322091520_changedNamesOfcolumnsAndAddedNewColumn.Designer.cs" />
+    <Compile Include="Migrations\20200401181816_removedArticleClass.cs" />
+    <Compile Include="Migrations\20200401181816_removedArticleClass.Designer.cs" />
+    <Compile Include="Migrations\20200401182124_removedArticleClass1.cs" />
+    <Compile Include="Migrations\20200401182124_removedArticleClass1.Designer.cs" />
+    <Compile Include="Migrations\20200401182532_removedArticleClass2.cs" />
+    <Compile Include="Migrations\20200401182532_removedArticleClass2.Designer.cs" />
+    <Compile Include="Migrations\20200401184312_removedArticleClass3.cs" />
+    <Compile Include="Migrations\20200401184312_removedArticleClass3.Designer.cs" />
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
   </ItemGroup>
 

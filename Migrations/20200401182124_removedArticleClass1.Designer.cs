@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TravelUp.Data;
 
 namespace TravelUp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200401182124_removedArticleClass1")]
+    partial class removedArticleClass1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,11 +240,9 @@ namespace TravelUp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("AuthorId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
                     b.Property<string>("Header")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
 
                     b.Property<int?>("RatingId")
                         .HasColumnType("int");
@@ -252,11 +252,9 @@ namespace TravelUp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
                     b.HasIndex("RatingId");
 
-                    b.ToTable("AllTravels");
+                    b.ToTable("Travels");
                 });
 
             modelBuilder.Entity("TravelUp.Model.TravelUserFavouriteList", b =>
@@ -349,10 +347,6 @@ namespace TravelUp.Migrations
 
             modelBuilder.Entity("TravelUp.Model.Travel", b =>
                 {
-                    b.HasOne("TravelUp.Model.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
-
                     b.HasOne("TravelUp.Model.Rating", "Rating")
                         .WithMany()
                         .HasForeignKey("RatingId");

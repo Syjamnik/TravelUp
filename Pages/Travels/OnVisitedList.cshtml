@@ -9,31 +9,34 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.OnVisitedList[0].Travel.Id)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.OnVisitedList[0].Travel.Author.UserName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.OnVisitedList[0].Travel.Header)
             </th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
 
     <tbody>
         @foreach (var item in Model.OnVisitedList)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Travel.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Travel.Author.UserName);
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Travel.Header)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel.Author.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel.Header)
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-page="./OnVisitedList" asp-route-id="@item.Travel.Id"> delete from list</a>
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.Travel.Id"> go to page</a>
+            </td>
+        </tr>
+
         }
     </tbody>
 </table>

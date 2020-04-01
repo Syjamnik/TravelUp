@@ -29,20 +29,20 @@
         <hr />
 
         @{
-            var parms = new Dictionary<string, string>
+            var favoriteList = new Dictionary<string, string>
             {
                 { "id", Model.Travel.Id.ToString() },
                 { "addTo", "1" }
             };
 
-            var parms2 = new Dictionary<string, string>
+            var visitedList = new Dictionary<string, string>
             {
                 { "id", Model.Travel.Id.ToString() },
                 { "addTo", "2" }
             };
         }
-        <a class="btn btn-primary" asp-page="./Details" asp-route-id="@Model.Travel.Id" asp-all-route-data="parms">Add to Favourite list</a>
-        <a class="btn btn-primary" asp-page="./Details" asp-route-id="@Model.Travel.Id" asp-all-route-data="parms2">Add to Visited list</a>
+        <a class="btn btn-primary" asp-page="./Details" asp-route-id="@Model.Travel.Id" asp-all-route-data="favoriteList">Add to Favourite list</a>
+        <a class="btn btn-primary" asp-page="./Details" asp-route-id="@Model.Travel.Id" asp-all-route-data="visitedList">Add to Visited list</a>
     </content>
 </div>
 <div>

@@ -16,6 +16,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Travel[0].Header)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Travel[0].Author)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -27,13 +30,17 @@
                     @Html.DisplayFor(modelItem => item.Header)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Author.UserName)
+                </td>
+
+                <td>
 
                     @if (User.IsInRole(StaticDetails.Admin))
                     {
                         <a class="btn btn-primary text-white" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
                         <a class="btn btn-danger " asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                     }
-                    @if (User.IsInRole(StaticDetails.Admin)|| User.IsInRole(StaticDetails.User))
+                    @if (User.IsInRole(StaticDetails.Admin) || User.IsInRole(StaticDetails.User))
                     {
                         <a class="btn btn-primary text-white" asp-page="./Details" asp-route-id="@item.Id">Details</a>
                     }

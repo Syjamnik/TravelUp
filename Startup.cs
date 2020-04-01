@@ -32,11 +32,12 @@ namespace TravelUp
 
             services.PostConfigure<CookieAuthenticationOptions>(
                 IdentityConstants.ApplicationScheme,
-                opt=> {
+                opt =>
+                {
                     opt.LoginPath = "/identity/account/Login";
                     opt.AccessDeniedPath = "/identity/account/AccessDenied";
                     opt.LogoutPath = "/identity/account/Logout";
-                } 
+                }
                 );
             #endregion
 

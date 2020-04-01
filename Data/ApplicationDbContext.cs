@@ -21,20 +21,29 @@ namespace TravelUp.Data
         {
             #region travel
             modelBuilder.Entity<Travel>()
-                        .ToTable("Travels");
+            .HasKey(c => c.Id);
 
             modelBuilder.Entity<Travel>()
-                        .HasKey(c => c.Id);
-
+                        .HasOne(c => c.Rating);
             modelBuilder.Entity<Travel>()
                         .HasOne(c => c.Author);
 
             modelBuilder.Entity<Travel>()
                         .HasOne(c => c.Rating);
 
-            modelBuilder.Entity<Travel>()
-                        .Property(c => c.Header)
-                        .HasMaxLength(50);
+            /*            modelBuilder.Entity<Travel>()
+                                    .ToTable("Travels");
+
+
+
+            *//*           *//*
+
+                        modelBuilder.Entity<Travel>()
+                                    .HasOne(c => c.Rating);
+
+                        modelBuilder.Entity<Travel>()
+                                    .Property(c => c.Header)
+                                    .HasMaxLength(50);*/
 
             #endregion
 
@@ -46,8 +55,8 @@ namespace TravelUp.Data
                         .HasKey(c => c.Id);
             #endregion
 
-            #region user
-            #endregion
+
+
 
             #region MTM TravelUserFavouriteList
 
@@ -79,7 +88,7 @@ namespace TravelUp.Data
                         .WithMany(c => c.OnVisitedList)
                         .HasForeignKey(c => c.TravelId);
             #endregion
-          
+
             base.OnModelCreating(modelBuilder);
         }
 

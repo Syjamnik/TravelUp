@@ -85,10 +85,10 @@ namespace TravelUp.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     // utwórz role jeśli nie istnieją 
-                    if (!await  _roleManager.RoleExistsAsync(StaticDetails.Admin))
-                       await  _roleManager.CreateAsync(new IdentityRole(StaticDetails.Admin));
+                    if (!await _roleManager.RoleExistsAsync(StaticDetails.Admin))
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.Admin));
 
-                    if (!await  _roleManager.RoleExistsAsync(StaticDetails.User))
+                    if (!await _roleManager.RoleExistsAsync(StaticDetails.User))
                         await _roleManager.CreateAsync(new IdentityRole(StaticDetails.User));
                     // twórz nowego usera jako zwykłego usera
                     await _userManager.AddToRoleAsync(user, StaticDetails.User);

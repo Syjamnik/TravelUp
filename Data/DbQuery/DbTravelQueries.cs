@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TravelUp.Data;
 using TravelUp.Model;
 
 namespace TravelUp.Data.DbQuery
@@ -41,6 +40,8 @@ namespace TravelUp.Data.DbQuery
         public async Task<List<Travel>> ReadAll()
         {
             return await _dbCtx.AllTravels.Include(c => c.Rating)
+
+
                                  .ToListAsync();
         }
         public async Task<Travel> UpdateById(int id, Travel item)

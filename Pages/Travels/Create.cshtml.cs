@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
@@ -12,10 +13,14 @@ namespace TravelUp.Pages.Travels
     public class CreateModel : PageModel
     {
         private readonly DbTravelQueries _db;
+        private readonly DbUserQueries _dbU;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public CreateModel(DbTravelQueries dbTravelQueries)
+        public CreateModel(DbTravelQueries dbTravelQueries, UserManager<IdentityUser> _userManager, DbUserQueries dbUserQueries)
         {
             _db = dbTravelQueries;
+            _dbU = dbUserQueries;
+            this._userManager = _userManager;
         }
 
         public IActionResult OnGet()
@@ -34,7 +39,7 @@ namespace TravelUp.Pages.Travels
             {
                 return Page();
             }
-
+            Travel.Author = _dbU.Read(_userManager.GetUserId(User));
             await _db.Create(Travel);
             return RedirectToPage("./Index");
         }
