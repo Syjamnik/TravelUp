@@ -5,11 +5,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+    <p>
+        list of all travels:
+        <a class="btn btn-primary" asp-page="Create">Add your travel!</a>
+    </p>
 <table class="table">
     <thead>
         <tr>
@@ -19,7 +19,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.Travel[0].Author)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Travel[0].Created)
+            </th>
+            <th>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +35,10 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Author.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created)
+
                 </td>
 
                 <td>
