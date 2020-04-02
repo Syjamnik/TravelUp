@@ -28,6 +28,8 @@
     <Compile Include="Migrations\20200401182532_removedArticleClass2.Designer.cs" />
     <Compile Include="Migrations\20200401184312_removedArticleClass3.cs" />
     <Compile Include="Migrations\20200401184312_removedArticleClass3.Designer.cs" />
+    <Compile Include="Migrations\20200402112754_EditedRatingClass.cs" />
+    <Compile Include="Migrations\20200402112754_EditedRatingClass.Designer.cs" />
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
   </ItemGroup>
 
