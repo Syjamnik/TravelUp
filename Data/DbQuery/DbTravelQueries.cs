@@ -7,7 +7,7 @@ using TravelUp.Model;
 
 namespace TravelUp.Data.DbQuery
 {
-    public class DbTravelQueries : ICRUD<Travel, int>
+    public class DbTravelQueries: ICRUD<Travel, int>
     {
         private ApplicationDbContext _dbCtx;
         public DbTravelQueries(ApplicationDbContext dbCtx)
@@ -17,37 +17,39 @@ namespace TravelUp.Data.DbQuery
         public async Task<Travel> Create(Travel item)
         {
             await _dbCtx.AddAsync(item);
-            await _dbCtx.SaveChangesAsync();
+            await SaveChangesAsync();
             return item;
         }
 
-        public Task<bool> DeleteById(int id)
+        public async Task DeleteById(int id)
         {
-            throw new NotImplementedException();
+            Travel travel = _dbCtx.AllTravels.Where(c => c.Id == id)
+                                             .FirstOrDefault();
+            _dbCtx.AllTravels.Remove(travel);
+            await SaveChangesAsync();
         }
 
-        public Task<bool> DeleteByItem(Travel item)
+        public async Task DeleteByItem(Travel item)
         {
-            throw new NotImplementedException();
+            _dbCtx.AllTravels.Remove(item);
+            await SaveChangesAsync();
         }
 
         public Travel Read(int id)
         {
             return _dbCtx.AllTravels.Include(c => c.Rating)
-                                 .Where(t => t.Id == id)
-                                 .FirstOrDefault();
+                                    .Where(t => t.Id == id)
+                                    .FirstOrDefault();
         }
         public async Task<List<Travel>> ReadAll()
         {
             return await _dbCtx.AllTravels.Include(c => c.Rating)
-
-
-                                 .ToListAsync();
+                                          .ToListAsync();
         }
         public async Task<Travel> UpdateById(int id, Travel item)
         {
             Travel oldTravel = _dbCtx.AllTravels.Where(t => t.Id == id)
-                                            .FirstOrDefault();
+                                                .FirstOrDefault();
 
             if (oldTravel != null)
             {
@@ -56,8 +58,7 @@ namespace TravelUp.Data.DbQuery
                 oldTravel.OnVisitedList = item.OnVisitedList;
                 oldTravel.OnFavouriteList = item.OnFavouriteList;
 
-
-                await _dbCtx.SaveChangesAsync();
+                await SaveChangesAsync();
                 return oldTravel;
             }
             else
@@ -68,8 +69,13 @@ namespace TravelUp.Data.DbQuery
         {
             _dbCtx.AllTravels.Update(oldItem);
             oldItem = newItem;
-            await _dbCtx.SaveChangesAsync();
+            await SaveChangesAsync();
+
             return oldItem;
+        }
+        public async Task SaveChangesAsync()
+        {
+            await _dbCtx.SaveChangesAsync();
         }
 
     }

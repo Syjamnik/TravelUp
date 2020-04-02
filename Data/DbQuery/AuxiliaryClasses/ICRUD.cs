@@ -1,15 +1,18 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace TravelUp.Data.DbQuery
 {
     interface ICRUD<T, I>
     {
-        public Task<T> Create(T item);
-        public T Read(I id);
-        public Task<T> UpdateByObject(T oldItem, T newItem);
-        public Task<T> UpdateById(I id, T item);
-        public Task<bool> DeleteByItem(T item);
-        public Task<bool> DeleteById(I id);
+        Task<T> Create(T item);
+        Task DeleteById(I id);
+        Task DeleteByItem(T item);
+        T Read(I id);
+        Task<List<T>> ReadAll();
+        Task<T> UpdateById(I id, T item);
+        Task<T> UpdateByObject(T oldItem, T newItem);
+        Task SaveChangesAsync();
 
     }
 }

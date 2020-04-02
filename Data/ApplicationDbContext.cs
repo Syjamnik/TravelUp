@@ -55,9 +55,6 @@ namespace TravelUp.Data
                         .HasKey(c => c.Id);
             #endregion
 
-
-
-
             #region MTM TravelUserFavouriteList
 
             modelBuilder.Entity<TravelUserFavouriteList>()

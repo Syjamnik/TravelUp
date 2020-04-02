@@ -7,7 +7,7 @@ using TravelUp.Model;
 
 namespace TravelUp.Data.DbQuery
 {
-    public class DbUserQueries : ICRUD<User, string>
+    public class DbUserQueries:ICRUD<User, string>
     {
         private ApplicationDbContext _dbCtx;
         public DbUserQueries(ApplicationDbContext applicationDbContext)
@@ -17,20 +17,25 @@ namespace TravelUp.Data.DbQuery
         }
         public async Task<User> Create(User item)
         {
-            await _dbCtx.AddAsync(item);
-
-            await _dbCtx.SaveChangesAsync();
+            await _dbCtx.Users.AddAsync(item);
+            await SaveChangesAsync();
             return item;
         }
 
-        public Task<bool> DeleteById(string id)
+        public async Task DeleteById(string id)
         {
-            throw new NotImplementedException();
+            var user = _dbCtx.Users.Where(c => c.Id == id)
+                                   .FirstOrDefault();
+
+            _dbCtx.Users.Remove(user);
+
+            await SaveChangesAsync();
         }
 
-        public Task<bool> DeleteByItem(User item)
+        public async Task DeleteByItem(User item)
         {
-            throw new NotImplementedException();
+            _dbCtx.Users.Remove(item);
+            await SaveChangesAsync();
         }
         public async Task<User> TrackItem(string id)
         {
@@ -42,31 +47,28 @@ namespace TravelUp.Data.DbQuery
         public User Read(string id)
         {
             return _dbCtx.AllUsers
-                .Include(c => c.OnFavouriteList)
-                    .ThenInclude(c => c.Travel)
-                    .ThenInclude(c => c.Author)
-
-                .Include(c => c.OnVisitedList)
-                    .ThenInclude(c => c.Travel)
-                    .ThenInclude(c => c.Author)
-                .Where(c => c.Id.Equals(id.ToString()))
-                .FirstOrDefault();
+                .Include(c => c.OnFavouriteList).ThenInclude(c => c.Travel).ThenInclude(c => c.Author)
+                .Include(c => c.OnVisitedList).ThenInclude(c => c.Travel).ThenInclude(c => c.Author)
+                .Where(c => c.Id.Equals(id.ToString())).FirstOrDefault();
         }
         public async Task<List<User>> ReadAll()
         {
-            return await _dbCtx.AllUsers.Include(c => c.OnFavouriteList)
-                                        .Include(c => c.OnVisitedList).ToListAsync();
+            return await _dbCtx.AllUsers
+                .Include(c => c.OnFavouriteList).ThenInclude(c => c.Travel).ThenInclude(c => c.Author)
+                .Include(c => c.OnVisitedList).ThenInclude(c => c.Travel).ThenInclude(c => c.Author)
+                .ToListAsync();
         }
 
         public async Task<User> UpdateById(string id, User item)
         {
-            var oldUser = _dbCtx.AllUsers.Where(c => c.Id.Equals(id.ToString()))
-                                      .FirstOrDefault();
+            User oldUser = _dbCtx.AllUsers.Where(c => c.Id.Equals(id.ToString()))
+                                          .FirstOrDefault();
+
             if (oldUser != null)
             {
                 oldUser.OnFavouriteList = item.OnFavouriteList;
                 oldUser.OnVisitedList = item.OnVisitedList;
-                await _dbCtx.SaveChangesAsync();
+                await SaveChangesAsync();
 
                 return oldUser;
             }
@@ -77,10 +79,10 @@ namespace TravelUp.Data.DbQuery
             _dbCtx.Users.Update(oldItem);
             oldItem.OnVisitedList = newItem.OnVisitedList;
             oldItem.OnFavouriteList = newItem.OnFavouriteList;
-            await _dbCtx.SaveChangesAsync();
+            await SaveChangesAsync();
             return oldItem;
         }
-        public async void SaveChanges()
+        public async Task SaveChangesAsync()
         {
             await _dbCtx.SaveChangesAsync();
         }

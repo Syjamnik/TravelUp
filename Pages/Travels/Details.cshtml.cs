@@ -50,7 +50,7 @@ namespace TravelUp.Pages.Travels
                                                    c.Travel.Id == Travel.Id).FirstOrDefault() == null)
                 {
 
-                    await _dbF.add(new TravelUserFavouriteList
+                    await _dbF.Create(new TravelUserFavouriteList
                     {
                         User = user,
                         Travel = Travel
@@ -62,7 +62,7 @@ namespace TravelUp.Pages.Travels
                     user.OnFavouriteList.Where(c => c.User.Id == user.Id &&
                                                    c.Travel.Id == Travel.Id).FirstOrDefault() == null)
                 {
-                    await _dbV.add(new TravelUserVisitedList
+                    await _dbV.Create(new TravelUserVisitedList
                     {
                         User = user,
                         Travel = Travel

@@ -7,27 +7,25 @@ namespace TravelUp.Data.DbQuery
 {
     public class DbVisitedMTMQueries
     {
-        private ApplicationDbContext _dbContext;
+        private ApplicationDbContext _dbCtx;
         public DbVisitedMTMQueries(ApplicationDbContext applicationDbContext)
         {
-            this._dbContext = applicationDbContext;
+            this._dbCtx = applicationDbContext;
         }
-        public async Task add(TravelUserVisitedList item)
+        public async Task Create(TravelUserVisitedList item)
         {
-            await _dbContext.TravelUserVisMTMs.AddAsync(item);
-            await _dbContext.SaveChangesAsync();
+            await _dbCtx.TravelUserVisMTMs.AddAsync(item);
+            await SaveChangesAsync();
         }
-
-        public List<TravelUserVisitedList> getAll(string UserId)
+        public async Task Delete(string idUser)
         {
-            return _dbContext.TravelUserVisMTMs.Where(c => c.UserId == UserId).ToList();
+            var objToDelete = _dbCtx.TravelUserVisMTMs.Where(c => c.UserId == idUser).FirstOrDefault();
+            _dbCtx.TravelUserVisMTMs.Remove(objToDelete);
+            await SaveChangesAsync();
         }
-
-        public async Task delete(string idUser)
+        public async Task SaveChangesAsync()
         {
-            var objToDelete = _dbContext.TravelUserVisMTMs.Where(c => c.UserId == idUser).FirstOrDefault();
-            _dbContext.TravelUserVisMTMs.Remove(objToDelete);
-            await _dbContext.SaveChangesAsync();
+            await _dbCtx.SaveChangesAsync();
         }
     }
 }

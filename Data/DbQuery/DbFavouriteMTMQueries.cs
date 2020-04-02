@@ -6,21 +6,28 @@ namespace TravelUp.Data.DbQuery
 {
     public class DbFavouriteMTMQueries
     {
-        private ApplicationDbContext _dbContext;
+        private ApplicationDbContext _dbCtx;
         public DbFavouriteMTMQueries(ApplicationDbContext applicationDbContext)
         {
-            this._dbContext = applicationDbContext;
+            this._dbCtx = applicationDbContext;
         }
-        public async Task add(TravelUserFavouriteList item)
+        public async Task Create(TravelUserFavouriteList item)
         {
-            await _dbContext.TravelUserFaMTMs.AddAsync(item);
-            await _dbContext.SaveChangesAsync();
+            await _dbCtx.TravelUserFaMTMs.AddAsync(item);
+            await SaveChangesAsync();
         }
-        public async Task delete(string idUser)
+        public async Task Delete(string idUser)
         {
-            var objToDelete = _dbContext.TravelUserFaMTMs.Where(c => c.UserId == idUser).FirstOrDefault();
-            _dbContext.TravelUserFaMTMs.Remove(objToDelete);
-            await _dbContext.SaveChangesAsync();
+            var objToDelete = _dbCtx.TravelUserFaMTMs.Where(c => c.UserId == idUser)
+                                                     .FirstOrDefault();
+            _dbCtx.TravelUserFaMTMs.Remove(objToDelete);
+
+            await SaveChangesAsync();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbCtx.SaveChangesAsync();
         }
 
     }
