@@ -80,7 +80,7 @@ namespace TravelUp.Pages.Travels
             if (Travel.Rating.NumberOfVotes <= 0)
                 RatingValue = 0;
             else
-                RatingValue = Travel.Rating.Votes / Travel.Rating.NumberOfVotes;
+                RatingValue = Travel.Rating.Score / Travel.Rating.NumberOfVotes;
 
             Math.Round(RatingValue);
 
