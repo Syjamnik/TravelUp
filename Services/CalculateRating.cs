@@ -6,7 +6,7 @@ using TravelUp.Model;
 
 namespace TravelUp.Services
 {
-    public class CalculateRating
+    public class CalculateRating: ICalculateRating
     {
         public int Calculate(int numberOfVotes, long score)
         {

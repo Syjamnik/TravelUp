@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Threading.Tasks;
 using TravelUp.Data.DbQuery;
 using TravelUp.Data.DbQuery.AuxiliaryClasses;
@@ -40,7 +41,10 @@ namespace TravelUp.Pages.Travels
             {
                 return Page();
             }
-            Travel.Author = _dbU.Read(_userManager.GetUserId(User));
+            var userId = _userManager.GetUserId(User);
+
+            Travel.Author = _dbU.Read(userId);
+
             await _db.Create(Travel);
             return RedirectToPage("./Index");
         }

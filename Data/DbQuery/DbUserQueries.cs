@@ -23,20 +23,27 @@ namespace TravelUp.Data.DbQuery
             return item;
         }
 
-        public async Task DeleteById(string id)
+        public async Task<User> DeleteById(string id)
         {
             var user = _dbCtx.Users.Where(c => c.Id == id)
                                    .FirstOrDefault();
+            if (user == null)
+                return null;
 
             _dbCtx.Users.Remove(user);
-
             await SaveChangesAsync();
+            return user as User;
         }
 
-        public async Task DeleteByItem(User item)
+        public async Task<User> DeleteByItem(User item)
         {
+            if (item == null)
+                return null;
+
             _dbCtx.Users.Remove(item);
             await SaveChangesAsync();
+
+            return item;
         }
         public async Task<User> TrackItem(string id)
         {

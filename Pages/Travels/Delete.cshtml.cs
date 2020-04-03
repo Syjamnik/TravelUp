@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using TravelUp.Data;
+using TravelUp.Data.DbQuery;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
 using TravelUp.Utility;
 
@@ -13,24 +15,24 @@ namespace TravelUp.Pages.Travels
     [Authorize(Roles = StaticDetails.AdminAndUser)]
     public class DeleteModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IDbTravelQueries _dbT;
 
-        public DeleteModel(ApplicationDbContext context)
+        public DeleteModel(IDbTravelQueries dbTravelQueries)
         {
-            _context = context;
+            _dbT = dbTravelQueries;
         }
 
         [BindProperty]
         public Travel Travel { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Travel = await _context.AllTravels.FirstOrDefaultAsync(m => m.Id == id);
+            Travel = _dbT.Read(id.GetValueOrDefault());
 
             if (Travel == null)
             {
@@ -45,14 +47,10 @@ namespace TravelUp.Pages.Travels
             {
                 return NotFound();
             }
+               var deletedTravel= await _dbT.DeleteById(id.GetValueOrDefault());
 
-            Travel = await _context.AllTravels.FindAsync(id);
-
-            if (Travel != null)
-            {
-                _context.AllTravels.Remove(Travel);
-                await _context.SaveChangesAsync();
-            }
+            if (deletedTravel == null)
+                return NotFound();
 
             return RedirectToPage("./Index");
         }

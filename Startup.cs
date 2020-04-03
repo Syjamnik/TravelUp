@@ -55,7 +55,7 @@ namespace TravelUp
             services.AddScoped<IDbFavouriteMTMQueries, DbFavouriteMTMQueries>();
             services.AddScoped<IDbVisitedMTMQueries, DbVisitedMTMQueries>();
 
-            services.AddSingleton<CalculateRating>();
+            services.AddSingleton<ICalculateRating, CalculateRating>();
 
 
             services.AddRazorPages();

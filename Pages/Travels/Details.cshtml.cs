@@ -19,10 +19,14 @@ namespace TravelUp.Pages.Travels
         private readonly IDbVisitedMTMQueries _dbV;
         private readonly IDbUserQueries _dbU;
         private readonly UserManager<IdentityUser> userManager;
-        private readonly CalculateRating ratingCalc;
+        private readonly ICalculateRating ratingCalc;
 
-        public DetailsModel(IDbTravelQueries dbTravelQueries, IDbFavouriteMTMQueries dbFavouriteMTMQueries,
-                            IDbVisitedMTMQueries dbVisitedMTMQueries, IDbUserQueries dbUserQueries, UserManager<IdentityUser> userManager, CalculateRating calculateRating)
+        public DetailsModel(IDbTravelQueries dbTravelQueries,
+                            IDbFavouriteMTMQueries dbFavouriteMTMQueries,
+                            IDbVisitedMTMQueries dbVisitedMTMQueries,
+                            IDbUserQueries dbUserQueries,
+                            UserManager<IdentityUser> userManager,
+                            ICalculateRating calculateRating)
         {
 
             _db = dbTravelQueries;

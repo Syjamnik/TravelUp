@@ -22,18 +22,29 @@ namespace TravelUp.Data.DbQuery
             return item;
         }
 
-        public async Task DeleteById(int id)
+        public async Task<Travel> DeleteById(int id)
         {
             Travel travel = _dbCtx.AllTravels.Where(c => c.Id == id)
                                              .FirstOrDefault();
+            if(travel== null)
+            {
+                return null;
+            }
             _dbCtx.AllTravels.Remove(travel);
             await SaveChangesAsync();
+
+            return travel;
         }
 
-        public async Task DeleteByItem(Travel item)
+        public async Task<Travel> DeleteByItem(Travel item)
         {
+            if(item== null)
+                return null;
+                   
             _dbCtx.AllTravels.Remove(item);
             await SaveChangesAsync();
+
+            return item;
         }
 
         public Travel Read(int id)
