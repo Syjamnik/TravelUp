@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
 
 namespace TravelUp.Data.DbQuery
 {
-    public class DbUserQueries:ICRUD<User, string>
+    public class DbUserQueries:IDbUserQueries
     {
         private ApplicationDbContext _dbCtx;
         public DbUserQueries(ApplicationDbContext applicationDbContext)

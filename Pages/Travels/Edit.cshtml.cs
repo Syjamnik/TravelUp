@@ -2,15 +2,16 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 using TravelUp.Data.DbQuery;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
 
 namespace TravelUp.Pages.Travels
 {
     public class EditModel : PageModel
     {
-        private readonly DbTravelQueries _db;
+        private readonly IDbTravelQueries _db;
 
-        public EditModel(DbTravelQueries dbTravelQueries)
+        public EditModel(IDbTravelQueries dbTravelQueries)
         {
             _db = dbTravelQueries;
         }

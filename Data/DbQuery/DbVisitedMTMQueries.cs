@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
 
 namespace TravelUp.Data.DbQuery
 {
-    public class DbVisitedMTMQueries
+    public class DbVisitedMTMQueries: IDbVisitedMTMQueries
     {
         private ApplicationDbContext _dbCtx;
         public DbVisitedMTMQueries(ApplicationDbContext applicationDbContext)

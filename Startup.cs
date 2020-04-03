@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TravelUp.Data;
 using TravelUp.Data.DbQuery;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
+using TravelUp.Services;
 
 namespace TravelUp
 {
@@ -48,10 +50,12 @@ namespace TravelUp
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<DbUserQueries>();
-            services.AddScoped<DbTravelQueries>();
-            services.AddScoped<DbFavouriteMTMQueries>();
-            services.AddScoped<DbVisitedMTMQueries>();
+            services.AddScoped<IDbUserQueries,DbUserQueries>();
+            services.AddScoped<IDbTravelQueries, DbTravelQueries>();
+            services.AddScoped<IDbFavouriteMTMQueries, DbFavouriteMTMQueries>();
+            services.AddScoped<IDbVisitedMTMQueries, DbVisitedMTMQueries>();
+
+            services.AddSingleton<CalculateRating>();
 
 
             services.AddRazorPages();

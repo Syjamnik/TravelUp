@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TravelUp.Data.DbQuery;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
 
 namespace TravelUp.Pages.Travels
 {
     public class IndexModel : PageModel
     {
-        private readonly DbTravelQueries _db;
+        private readonly IDbTravelQueries _db;
 
-        public IndexModel(DbTravelQueries dbTravelQueries)
+        public IndexModel(IDbTravelQueries dbTravelQueries)
         {
             _db = dbTravelQueries;
         }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 using TravelUp.Data.DbQuery;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
 using TravelUp.Utility;
 
@@ -12,11 +13,11 @@ namespace TravelUp.Pages.Travels
     [Authorize(Roles = StaticDetails.AdminAndUser)]
     public class CreateModel : PageModel
     {
-        private readonly DbTravelQueries _db;
-        private readonly DbUserQueries _dbU;
+        private readonly IDbTravelQueries _db;
+        private readonly IDbUserQueries _dbU;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public CreateModel(DbTravelQueries dbTravelQueries, UserManager<IdentityUser> _userManager, DbUserQueries dbUserQueries)
+        public CreateModel(IDbTravelQueries dbTravelQueries, UserManager<IdentityUser> _userManager, IDbUserQueries dbUserQueries)
         {
             _db = dbTravelQueries;
             _dbU = dbUserQueries;

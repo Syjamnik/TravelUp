@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TravelUp.Data.DbQuery
+namespace TravelUp.Data.DbQuery.AuxiliaryClasses
 {
-    interface ICRUD<T, I>
+    public interface ICRUD<T, I>
     {
         Task<T> Create(T item);
         Task DeleteById(I id);

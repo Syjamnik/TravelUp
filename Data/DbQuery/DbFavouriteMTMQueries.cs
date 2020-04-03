@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
 
 namespace TravelUp.Data.DbQuery
 {
-    public class DbFavouriteMTMQueries
+    public class DbFavouriteMTMQueries : IDbFavouriteMTMQueries
     {
         private ApplicationDbContext _dbCtx;
         public DbFavouriteMTMQueries(ApplicationDbContext applicationDbContext)

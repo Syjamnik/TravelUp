@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TravelUp.Data.DbQuery;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
 using TravelUp.Utility;
 
@@ -10,9 +11,9 @@ namespace TravelUp.Pages.Users
     [Authorize(Roles = StaticDetails.User)]
     public class DetailsModel : PageModel
     {
-        private readonly DbUserQueries _db;
+        private readonly IDbUserQueries _db;
 
-        public DetailsModel(DbUserQueries dbUserQueries)
+        public DetailsModel(IDbUserQueries dbUserQueries)
         {
             _db = dbUserQueries;
         }

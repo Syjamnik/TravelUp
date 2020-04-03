@@ -5,21 +5,24 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelUp.Data.DbQuery;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
+using TravelUp.Services;
 
 namespace TravelUp.Pages.Travels
 {
 
     public class DetailsModel : PageModel
     {
-        private readonly DbTravelQueries _db;
-        private readonly DbFavouriteMTMQueries _dbF;
-        private readonly DbVisitedMTMQueries _dbV;
-        private readonly DbUserQueries _dbU;
-        UserManager<IdentityUser> userManager;
+        private readonly IDbTravelQueries _db;
+        private readonly IDbFavouriteMTMQueries _dbF;
+        private readonly IDbVisitedMTMQueries _dbV;
+        private readonly IDbUserQueries _dbU;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly CalculateRating ratingCalc;
 
-        public DetailsModel(DbTravelQueries dbTravelQueries, DbFavouriteMTMQueries dbFavouriteMTMQueries,
-                            DbVisitedMTMQueries dbVisitedMTMQueries, DbUserQueries dbUserQueries, UserManager<IdentityUser> userManager)
+        public DetailsModel(IDbTravelQueries dbTravelQueries, IDbFavouriteMTMQueries dbFavouriteMTMQueries,
+                            IDbVisitedMTMQueries dbVisitedMTMQueries, IDbUserQueries dbUserQueries, UserManager<IdentityUser> userManager, CalculateRating calculateRating)
         {
 
             _db = dbTravelQueries;
@@ -27,6 +30,7 @@ namespace TravelUp.Pages.Travels
             _dbV = dbVisitedMTMQueries;
             _dbU = dbUserQueries;
             this.userManager = userManager;
+            ratingCalc = calculateRating;
         }
 
         public Travel Travel { get; set; }
@@ -70,21 +74,13 @@ namespace TravelUp.Pages.Travels
                 }
             }
 
-
             Travel = _db.Read(id.GetValueOrDefault());
 
             if (Travel == null)
             {
                 return NotFound();
             }
-            if (Travel.Rating.NumberOfVotes <= 0)
-                RatingValue = 0;
-            else
-                RatingValue = Travel.Rating.Score / Travel.Rating.NumberOfVotes;
-
-            Math.Round(RatingValue);
-
-
+            RatingValue= ratingCalc.Calculate(Travel.Rating.NumberOfVotes, Travel.Rating.Score);
 
             return Page();
         }

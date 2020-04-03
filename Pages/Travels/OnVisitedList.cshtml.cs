@@ -5,15 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelUp.Data.DbQuery;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
 
 namespace TravelUp.Pages.Travels
 {
     public class OnVisitedListModel : PageModel
     {
-        private readonly DbUserQueries _db;
+        private readonly IDbUserQueries _db;
         private readonly UserManager<IdentityUser> _userManager;
-        public OnVisitedListModel(DbUserQueries db,
+        public OnVisitedListModel(IDbUserQueries db,
              UserManager<IdentityUser> userManager
              )
         {
