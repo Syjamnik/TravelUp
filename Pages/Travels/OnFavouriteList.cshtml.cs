@@ -21,20 +21,32 @@ namespace TravelUp.Pages.Travels
             _db = db;
         }
         public IList<TravelUserFavouriteList> OnFavouriteList { get; set; }
+
+        // deleteMethod
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            var user = await _userManager.GetUserAsync(User);
-            var userFromDb = _db.Read(user.Id);
-
-            if (id.HasValue)
+            if(id== null)
             {
-                var elementToDelete = userFromDb.OnFavouriteList.Where(c => c.Travel.Id == id && c.User.Id == user.Id).FirstOrDefault();
-                if (elementToDelete != null)
-                {
-                    userFromDb.OnFavouriteList.Remove(elementToDelete);
-                    await _db.UpdateById(user.Id, userFromDb);
-                }
+                return NotFound();
             }
+
+            var userId =  _userManager.GetUserId(User);
+            var userFromDb = _db.Read(userId);
+
+            if (userFromDb == null)
+            {
+                return NotFound();
+            }
+
+            var elementToDelete = userFromDb.OnFavouriteList.Where(c => c.Travel.Id == id && c.User.Id == userId)
+                                                            .FirstOrDefault();
+            
+            if (elementToDelete != null)
+            {
+                userFromDb.OnFavouriteList.Remove(elementToDelete);
+                await _db.UpdateById(userId, userFromDb);
+            }
+
 
             OnFavouriteList = userFromDb.OnFavouriteList;
             return Page();

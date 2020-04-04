@@ -25,6 +25,10 @@ namespace TravelUp.Data.DbQuery
 
         public async Task<User> DeleteById(string id)
         {
+            if (id == null)
+            {
+                return null;
+            }
             var user = _dbCtx.Users.Where(c => c.Id == id)
                                    .FirstOrDefault();
             if (user == null)
@@ -47,6 +51,10 @@ namespace TravelUp.Data.DbQuery
         }
         public async Task<User> TrackItem(string id)
         {
+            if (id == null)
+            {
+                return null;
+            }
             return await _dbCtx.AllUsers.Include(c => c.OnFavouriteList)
                                         .Include(c => c.OnVisitedList)
                                         .Where(c => c.Id == id)
@@ -54,6 +62,10 @@ namespace TravelUp.Data.DbQuery
         }
         public User Read(string id)
         {
+            if (id == null)
+            {
+                return null;
+            }
             return _dbCtx.AllUsers
                 .Include(c => c.OnFavouriteList).ThenInclude(c => c.Travel).ThenInclude(c => c.Author)
                 .Include(c => c.OnVisitedList).ThenInclude(c => c.Travel).ThenInclude(c => c.Author)
@@ -69,6 +81,10 @@ namespace TravelUp.Data.DbQuery
 
         public async Task<User> UpdateById(string id, User item)
         {
+            if (id == null)
+            {
+                return null;
+            }
             User oldUser = _dbCtx.AllUsers.Where(c => c.Id.Equals(id.ToString()))
                                           .FirstOrDefault();
 

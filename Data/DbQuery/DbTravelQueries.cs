@@ -24,6 +24,7 @@ namespace TravelUp.Data.DbQuery
 
         public async Task<Travel> DeleteById(int id)
         {
+
             Travel travel = _dbCtx.AllTravels.Where(c => c.Id == id)
                                              .FirstOrDefault();
             if(travel== null)
@@ -71,6 +72,7 @@ namespace TravelUp.Data.DbQuery
                 oldTravel.Header = item.Header;
                 oldTravel.OnVisitedList = item.OnVisitedList;
                 oldTravel.OnFavouriteList = item.OnFavouriteList;
+                oldTravel.Author = item.Author;
 
                 await SaveChangesAsync();
                 return oldTravel;
@@ -81,8 +83,16 @@ namespace TravelUp.Data.DbQuery
 
         public async Task<Travel> UpdateByObject(Travel oldItem, Travel newItem)
         {
+            if (oldItem == null || newItem == null)
+                return null;
+
             _dbCtx.AllTravels.Update(oldItem);
-            oldItem = newItem;
+            oldItem.Text = newItem.Text;
+            oldItem.Header = newItem.Header;
+            oldItem.OnVisitedList = newItem.OnVisitedList;
+            oldItem.OnFavouriteList = newItem.OnFavouriteList;
+            oldItem.Author = newItem.Author;
+
             await SaveChangesAsync();
 
             return oldItem;

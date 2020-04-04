@@ -24,19 +24,24 @@ namespace TravelUp.Pages.Travels
         public IList<TravelUserVisitedList> OnVisitedList { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            if (id == null)
+                return NotFound();
 
-            var user = await _userManager.GetUserAsync(User);
-            var userFromDb = _db.Read(user.Id);
 
-            if (id.HasValue)
+            var userId =  _userManager.GetUserId(User);
+            var userFromDb = _db.Read(userId);
+
+            if (userFromDb == null)
+                return NotFound();
+
+
+            var elementToDelete = userFromDb.OnVisitedList.Where(c => c.Travel.Id == id && c.User.Id == userId).FirstOrDefault();
+            if (elementToDelete != null)
             {
-                var elementToDelete = userFromDb.OnVisitedList.Where(c => c.Travel.Id == id && c.User.Id == user.Id).FirstOrDefault();
-                if (elementToDelete != null)
-                {
-                    userFromDb.OnVisitedList.Remove(elementToDelete);
-                    await _db.UpdateById(user.Id, userFromDb);
-                }
+                userFromDb.OnVisitedList.Remove(elementToDelete);
+                await _db.UpdateById(userId, userFromDb);
             }
+
 
             OnVisitedList = userFromDb.OnVisitedList;
             return Page();

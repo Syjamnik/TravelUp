@@ -44,8 +44,11 @@ namespace TravelUp.Pages.Travels
                 return Page();
             }
 
-            await _db.UpdateById(Travel.Id, Travel);
-
+            var updatedObj= await _db.UpdateById(Travel.Id, Travel);
+            if (updatedObj == null)
+            {
+                return NotFound();
+            }
             return RedirectToPage("./Index");
         }
     }
