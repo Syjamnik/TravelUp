@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using TravelUp.Data.DbQuery;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
 
 namespace TravelUp.Areas.Identity.Pages.Account.Manage
 {
@@ -12,13 +13,13 @@ namespace TravelUp.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         /* private readonly IEmailSender _emailSender;*/
-        private readonly DbUserQueries _db;
+        private readonly IDbUserQueries _db;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             /*IEmailSender emailSender,*/
-            DbUserQueries db)
+            IDbUserQueries db)
         {
             _db = db;
             _userManager = userManager;

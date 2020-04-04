@@ -24,9 +24,6 @@ namespace TravelUp.Pages.Travels
         public IList<TravelUserVisitedList> OnVisitedList { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
-                return NotFound();
-
 
             var userId =  _userManager.GetUserId(User);
             var userFromDb = _db.Read(userId);
