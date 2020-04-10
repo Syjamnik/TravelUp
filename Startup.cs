@@ -46,13 +46,19 @@ namespace TravelUp
             #endregion
 
             // konieczne gdy chcemy u¿ywaæ IdentityApplicationDBContext
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+/*            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddEntityFrameworkStores<ApplicationDbContext>();*/
+            services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddAuthentication().AddFacebook(x => {
-                x.AppId = "648674655691049";
-                x.AppSecret = "5ce4fef4eca9515db702f38c90177957";
+                x.AppId = Configuration.GetConnectionString("FacebookAppId");
+                x.AppSecret = Configuration.GetConnectionString("FacebookAppSecret");
             });
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
@@ -65,7 +71,6 @@ namespace TravelUp
             services.AddSingleton<IEmailSender, EmailSender>();
             services.Configure<EmailOptions>(Configuration);
             services.AddSingleton<ICalculateRating, CalculateRating>();
-
 
 
 
@@ -87,13 +92,16 @@ namespace TravelUp
                 app.UseHsts();
             }
 
+
+
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
             app.UseRouting();
+            app.UseCookiePolicy();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {

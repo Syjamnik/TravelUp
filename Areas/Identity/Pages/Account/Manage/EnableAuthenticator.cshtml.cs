@@ -13,14 +13,14 @@ namespace TravelUp.Areas.Identity.Pages.Account.Manage
 {
     public class EnableAuthenticatorModel : PageModel
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<EnableAuthenticatorModel> _logger;
         private readonly UrlEncoder _urlEncoder;
 
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
         public EnableAuthenticatorModel(
-            UserManager<User> userManager,
+            UserManager<IdentityUser> userManager,
             ILogger<EnableAuthenticatorModel> logger,
             UrlEncoder urlEncoder)
         {
@@ -59,7 +59,7 @@ namespace TravelUp.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            await LoadSharedKeyAndQrCodeUriAsync(user);
+            await LoadSharedKeyAndQrCodeUriAsync(user as User);
 
             return Page();
         }
@@ -74,7 +74,7 @@ namespace TravelUp.Areas.Identity.Pages.Account.Manage
 
             if (!ModelState.IsValid)
             {
-                await LoadSharedKeyAndQrCodeUriAsync(user);
+                await LoadSharedKeyAndQrCodeUriAsync(user as User);
                 return Page();
             }
 
@@ -87,7 +87,7 @@ namespace TravelUp.Areas.Identity.Pages.Account.Manage
             if (!is2faTokenValid)
             {
                 ModelState.AddModelError("Input.Code", "Verification code is invalid.");
-                await LoadSharedKeyAndQrCodeUriAsync(user);
+                await LoadSharedKeyAndQrCodeUriAsync(user as User);
                 return Page();
             }
 
