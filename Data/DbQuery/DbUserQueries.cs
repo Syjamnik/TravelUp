@@ -100,7 +100,7 @@ namespace TravelUp.Data.DbQuery
         }
         public async Task<User> UpdateByObject(User oldItem, User newItem)
         {
-            _dbCtx.Users.Update(oldItem);
+            _dbCtx.AllUsers.Update(oldItem);
             oldItem.OnVisitedList = newItem.OnVisitedList;
             oldItem.OnFavouriteList = newItem.OnFavouriteList;
             await SaveChangesAsync();
@@ -109,6 +109,11 @@ namespace TravelUp.Data.DbQuery
         public async Task SaveChangesAsync()
         {
             await _dbCtx.SaveChangesAsync();
+        }
+
+        public User ReadByEmail(string email)
+        {
+           return  _dbCtx.AllUsers.Where(c => c.Email == email).FirstOrDefault();
         }
     }
 }

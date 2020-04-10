@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using TravelUp.Model;
 using TravelUp.Utility;
@@ -22,20 +24,20 @@ namespace TravelUp.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
-        /*private readonly IEmailSender _emailSender;*/
+        private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             RoleManager<IdentityRole> roleManager,
-            ILogger<RegisterModel> logger
-            /*IEmailSender emailSender*/)
+            ILogger<RegisterModel> logger,
+            IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _logger = logger;
-            /* _emailSender = emailSender;*/
+            _emailSender = emailSender;
         }
 
         [BindProperty]
@@ -91,11 +93,7 @@ namespace TravelUp.Areas.Identity.Pages.Account
                     if (!await _roleManager.RoleExistsAsync(StaticDetails.User))
                         await _roleManager.CreateAsync(new IdentityRole(StaticDetails.User));
                     // twórz nowego usera jako zwykłego usera
-                    await _userManager.AddToRoleAsync(user, StaticDetails.User);
-
-
-
-
+                    await _userManager.AddToRoleAsync(user, StaticDetails.Admin);
 
                     _logger.LogInformation("User created a new account with password.");
 
@@ -107,20 +105,21 @@ namespace TravelUp.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    /*                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-                    */
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    /*if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
                     }
+
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
-                    }
+                    }*/
 
-
+                    return RedirectToPage("VerifyEmail", new { id = Input.Email });
 
                 }
                 foreach (var error in result.Errors)

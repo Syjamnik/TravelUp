@@ -591,9 +591,6 @@ C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\bin\Debug\netcoreapp3
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.csproj.CoreCompileInputs.cache
-C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.RazorAssemblyInfo.cache
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.RazorAssemblyInfo.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.AssemblyInfoInputs.cache
@@ -666,3 +663,9 @@ C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Travels\OnFavouriteList.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Pages\Travels\OnVisitedList.cshtml.g.cs
 C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.csprojAssemblyReference.cache
+C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Facebook.dll
+C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\bin\Debug\netcoreapp3.1\SendGrid.dll
+C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.csproj.CoreCompileInputs.cache
+C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\TravelUp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Klakier\Desktop\GIT PROJECTS\GIT PROJECT travelUP\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\VerifyEmail.cshtml.g.cs

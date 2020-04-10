@@ -92,7 +92,7 @@ namespace TravelUp.Pages.Travels
             //visited
             // if there user don't have this travel  on the list then add this travel
             if (addTo == 2 &&
-                user.OnFavouriteList.Where(c => c.User.Id == user.Id &&
+                user.OnVisitedList.Where(c => c.User.Id == user.Id &&
                                                c.Travel.Id == Travel.Id).FirstOrDefault() == null)
             {
                 await _dbV.Create(new TravelUserVisitedList

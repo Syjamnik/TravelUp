@@ -8,5 +8,6 @@ namespace TravelUp.Data.DbQuery.AuxiliaryClasses
 {
     public interface IDbUserQueries: ICRUD<User, string>
     {
+        User ReadByEmail(string email);
     }
 }

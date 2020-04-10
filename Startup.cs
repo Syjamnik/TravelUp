@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using TravelUp.Data;
 using TravelUp.Data.DbQuery;
 using TravelUp.Data.DbQuery.AuxiliaryClasses;
+using TravelUp.Email;
 using TravelUp.Services;
 
 namespace TravelUp
@@ -48,14 +50,24 @@ namespace TravelUp
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddAuthentication().AddFacebook(x => {
+                x.AppId = "648674655691049";
+                x.AppSecret = "5ce4fef4eca9515db702f38c90177957";
+            });
+
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IDbUserQueries,DbUserQueries>();
             services.AddScoped<IDbTravelQueries, DbTravelQueries>();
             services.AddScoped<IDbFavouriteMTMQueries, DbFavouriteMTMQueries>();
             services.AddScoped<IDbVisitedMTMQueries, DbVisitedMTMQueries>();
-
+            
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<EmailOptions>(Configuration);
             services.AddSingleton<ICalculateRating, CalculateRating>();
+
+
+
 
 
             services.AddRazorPages();

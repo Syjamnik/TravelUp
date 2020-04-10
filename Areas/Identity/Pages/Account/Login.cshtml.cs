@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
+using TravelUp.Model;
 
 namespace TravelUp.Areas.Identity.Pages.Account
 {
@@ -17,14 +19,17 @@ namespace TravelUp.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IDbUserQueries _dbU;
 
         public LoginModel(SignInManager<IdentityUser> signInManager,
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+            IDbUserQueries dbUserQueries)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _dbU = dbUserQueries;
         }
 
         [BindProperty]
@@ -74,8 +79,14 @@ namespace TravelUp.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                User userFromDb = _dbU.ReadByEmail(Input.Email);
+                if (userFromDb != null && !userFromDb.EmailConfirmed)
+                    return RedirectToPage("VerifyEmail", new { id = Input.Email });
+
+
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
