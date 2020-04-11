@@ -27,7 +27,14 @@
             @Html.DisplayFor(model => model.Travel.Author.Email)
         </div>
         <hr />
+        @Html.DisplayNameFor(model => model.Travel.AddressOfThePlace):
+        @Html.DisplayFor(model => model.Travel.AddressOfThePlace)
 
+        <p style="height:500px;width:100%;" id="map"></p>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1RbB__IUKO4_FFy5NL82TYbsl1fl8Y-Y">
+        </script>
+
+        <hr />
         @{
             var favoriteList = new Dictionary<string, string>
             {
@@ -49,3 +56,42 @@
     <a asp-page="./Edit" asp-route-id="@Model.Travel.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>
+
+<script type="text/javascript">
+
+    var geocoder = new google.maps.Geocoder();
+    var address = "@Model.Travel.AddressOfThePlace";
+
+    alert(address);
+    // Używamy GeocodingAPI w celu zmiany adresu na dane geograficzne
+    // Długość i szerokość geograficzną pozwalają na zaznacznie 'lokalizacji' na mapie
+    geocoder.geocode({ 'address': address }, function (results, status) {
+
+        if (status == google.maps.GeocoderStatus.OK) {
+            var latitude = results[0].geometry.location.lat();
+            var longitude = results[0].geometry.location.lng();
+            //alert("szerokosc: " + latitude + "\ndlugosc: " + longitude);
+
+            // tworzymy instancję nowej mapy z odpowiednim powiększeniem, punktem centralnym i typem mapy:
+            // typy map: roadmap, satellite, hybrid oraz terrain
+            // punkty startowe to pierwszy element kolekcji
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 14,
+                center: { lat: latitude, lng: longitude },
+                mapTypeId: 'terrain'
+            });
+
+
+            // Na nasza mapę naniesiemy teraz naszą "lokalizację"
+            var gdynia = { lat: latitude, lng: longitude };
+
+            var marker = new google.maps.Marker({ position: gdynia, map: map });
+
+        } else {
+            debugger;
+            console.log(results);
+        }
+    });
+
+
+</script>

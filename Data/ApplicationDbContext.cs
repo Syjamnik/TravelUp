@@ -31,6 +31,28 @@ namespace TravelUp.Data
             modelBuilder.Entity<Travel>()
                         .HasOne(c => c.Rating);
 
+            modelBuilder.Entity<Travel>()
+                        .Property(c => c.AddressOfThePlace)
+                        .HasMaxLength(150);
+
+            modelBuilder.Entity<Travel>()
+                        .Property(c => c.AddressOfThePlace)
+                        .IsRequired();
+
+            modelBuilder.Entity<Travel>()
+                        .Property(c => c.Header)
+                        .IsRequired();
+
+            modelBuilder.Entity<Travel>()
+                        .Property(c => c.Header)
+                        .HasMaxLength(100);
+
+            modelBuilder.Entity<Travel>()
+                        .Property(c => c.Text)
+                        .IsRequired();
+
+
+
             /*            modelBuilder.Entity<Travel>()
                                     .ToTable("Travels");
 
@@ -41,9 +63,7 @@ namespace TravelUp.Data
                         modelBuilder.Entity<Travel>()
                                     .HasOne(c => c.Rating);
 
-                        modelBuilder.Entity<Travel>()
-                                    .Property(c => c.Header)
-                                    .HasMaxLength(50);*/
+ */
 
             #endregion
 

@@ -30,6 +30,12 @@
     <Compile Include="Migrations\20200401184312_removedArticleClass3.Designer.cs" />
     <Compile Include="Migrations\20200402112754_EditedRatingClass.cs" />
     <Compile Include="Migrations\20200402112754_EditedRatingClass.Designer.cs" />
+    <Compile Include="Migrations\20200410221239_addedFieldsInTravelClassForGoogleMaps.cs" />
+    <Compile Include="Migrations\20200410221239_addedFieldsInTravelClassForGoogleMaps.designer.cs" />
+    <Compile Include="Migrations\20200410231004_removedlocalizationPropertiesAndAddedAddress.cs" />
+    <Compile Include="Migrations\20200410231004_removedlocalizationPropertiesAndAddedAddress.designer.cs" />
+    <Compile Include="Migrations\20200410235104_addedParametersOnModelCreating.cs" />
+    <Compile Include="Migrations\20200410235104_addedParametersOnModelCreating.designer.cs" />
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
   </ItemGroup>
 

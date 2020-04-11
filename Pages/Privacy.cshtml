@@ -6,3 +6,56 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
+<style>
+    /* Zawsze ustawiaj wysokość mapy w sposób jawny, aby określić (tym samym) rozmiar kontenera div */
+    #map {
+        height: 100%;
+        width: 100%;
+        position: static !important;
+    }
+</style>
+
+<div id="map"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1RbB__IUKO4_FFy5NL82TYbsl1fl8Y-Y">
+</script>
+
+<script type="text/javascript">
+
+    var geocoder = new google.maps.Geocoder();
+    var address = "twojej starej 12";
+
+    // Używamy GeocodingAPI w celu zmiany adresu na dane geograficzne
+    // Długość i szerokość geograficzną pozwalają na zaznacznie 'lokalizacji' na mapie
+    geocoder.geocode({ 'address': address }, function (results, status) {
+
+        if (status == google.maps.GeocoderStatus.OK) {
+            var latitude = results[0].geometry.location.lat();
+            var longitude = results[0].geometry.location.lng();
+            //alert("szerokosc: " + latitude + "\ndlugosc: " + longitude);
+
+            // tworzymy instancję nowej mapy z odpowiednim powiększeniem, punktem centralnym i typem mapy:
+            // typy map: roadmap, satellite, hybrid oraz terrain
+            // punkty startowe to pierwszy element kolekcji
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 14,
+                center: { lat: latitude, lng: longitude },
+                mapTypeId: 'terrain'
+            });
+
+
+            // Na nasza mapę naniesiemy teraz naszą "lokalizację"
+            var gdynia = { lat: latitude, lng: longitude };
+
+            var marker = new google.maps.Marker({ position: gdynia, map: map });
+
+        } else {
+            debugger;
+            console.log(results);
+        }
+    });
+
+
+</script>
+
+
+
