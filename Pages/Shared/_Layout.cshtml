@@ -9,6 +9,7 @@
     <title>@ViewData["Title"] - TravelUp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/navigationStyles.css" />
     <script src="~/ckeditor/ckeditor.js" type="text/javascript"></script>
 </head>
 <body>
@@ -20,6 +21,8 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_loginPartial">
                         <ul class="navbar-nav flex-grow-1">
@@ -43,6 +46,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-page="/travels/OnVisitedList">My visited places</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/travels/CreatedTravels">My own travels</a>
                                 </li>
                             }
 

@@ -60,6 +60,7 @@ namespace TravelUp.Data.DbQuery
             return await _dbCtx.AllTravels.Include(c => c.Rating)
                                           .Include(c => c.Author)
                                           .ToListAsync();
+
         }
         public async Task<Travel> UpdateById(int id, Travel item)
         {
@@ -112,6 +113,9 @@ namespace TravelUp.Data.DbQuery
             await _dbCtx.SaveChangesAsync();
         }
 
-
+        public List<Travel> ReadAllUserTravels(string id)
+        {
+            return _dbCtx.AllTravels.Where(c => c.Author.Id == id).ToList();
+        }
     }
 }

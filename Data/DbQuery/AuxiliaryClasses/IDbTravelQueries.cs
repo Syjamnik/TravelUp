@@ -9,5 +9,7 @@ namespace TravelUp.Data.DbQuery.AuxiliaryClasses
     public interface IDbTravelQueries: ICRUD<Travel, int>
     {
         public Task<List<Travel>> DeleteAllTravelsByAuthorId(string id);
+        List<Travel> ReadAllUserTravels(string id);
+
     }
 }

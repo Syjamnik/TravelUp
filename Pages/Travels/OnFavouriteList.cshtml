@@ -14,7 +14,6 @@
                 @Html.DisplayNameFor(model => model.OnFavouriteList[0].Travel.Header)
             </th>
             <th></th>
-            <th></th>
         </tr>
     </thead>
 
@@ -26,13 +25,12 @@
                 @Html.DisplayFor(modelItem => item.Travel.Author.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Travel.Header)
+                <a class="btn btn-primary btn-header" asp-page="./Details" asp-route-id="@item.Travel.Id">
+                    @Html.DisplayFor(modelItem => item.Travel.Header)
+                </a>
             </td>
             <td>
                 <a class="btn btn-danger" asp-page="./OnFavouriteList" asp-route-id="@item.Travel.Id"> delete from list</a>
-            </td>
-            <td>
-                <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.Travel.Id"> go to page</a>
             </td>
         </tr>
         }

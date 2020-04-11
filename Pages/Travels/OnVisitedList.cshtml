@@ -1,6 +1,5 @@
 ﻿@page
 @model TravelUp.Pages.Travels.OnVisitedListModel
-
 @*
     ViewData["Title"]="Visisted places";
 *@
@@ -15,7 +14,6 @@
                 @Html.DisplayNameFor(model => model.OnVisitedList[0].Travel.Header)
             </th>
             <th></th>
-            <th></th>
         </tr>
     </thead>
 
@@ -27,13 +25,13 @@
                 @Html.DisplayFor(modelItem => item.Travel.Author.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Travel.Header)
+                <a class="btn btn-primary btn-header" asp-page="./Details" asp-route-id="@item.Travel.Id">
+
+                    @Html.DisplayFor(modelItem => item.Travel.Header)
+                </a> 
             </td>
             <td>
                 <a class="btn btn-danger" asp-page="./OnVisitedList" asp-route-id="@item.Travel.Id"> delete from list</a>
-            </td>
-            <td>
-                <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.Travel.Id"> go to page</a>
             </td>
         </tr>
 

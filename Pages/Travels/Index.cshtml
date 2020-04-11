@@ -35,26 +35,22 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Header)
+                    <a  class="btn btn-primary btn-header"  asp-page="./Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.Header)
+                    </a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Author.Email)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Created)
-
                 </td>
-
                 <td>
-
-                    @if (User.IsInRole(StaticDetails.Admin)|| (Model.UserEmail== item.Author.Email) )
+                    @if (User.IsInRole(StaticDetails.Admin) || (Model.UserEmail == item.Author.Email))
                     {
                         <a class="btn btn-primary text-white" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
                         <a class="btn btn-danger " asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                     }
-                        <a class="btn btn-primary text-white" asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                    
-
                 </td>
             </tr>
         }

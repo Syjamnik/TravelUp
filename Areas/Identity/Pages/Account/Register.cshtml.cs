@@ -119,8 +119,6 @@ namespace TravelUp.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
 
-                    return RedirectToPage("VerifyEmail", new { id = Input.Email });
-
                 }
                 foreach (var error in result.Errors)
                 {
