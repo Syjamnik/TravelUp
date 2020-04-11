@@ -10,7 +10,7 @@ using TravelUp.Utility;
 
 namespace TravelUp.Pages.Users
 {
-    [Authorize(Roles = StaticDetails.AdminAndUser)]
+    [Authorize(Roles = StaticDetails.Admin)]
     public class IndexModel : PageModel
     {
         private readonly IDbUserQueries _db;

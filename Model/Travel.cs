@@ -14,7 +14,6 @@ namespace TravelUp.Model
         public string Text { get; set; }
         public readonly DateTime Created = DateTime.Now;
         public DateTime Visited { get; }
-        
         public User Author { get; set; }
         public int Id { get; set; }
 

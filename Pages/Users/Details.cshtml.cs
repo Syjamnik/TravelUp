@@ -8,7 +8,7 @@ using TravelUp.Utility;
 
 namespace TravelUp.Pages.Users
 {
-    [Authorize(Roles = StaticDetails.User)]
+    [Authorize(Roles = StaticDetails.Admin)]
     public class DetailsModel : PageModel
     {
         private readonly IDbUserQueries _db;

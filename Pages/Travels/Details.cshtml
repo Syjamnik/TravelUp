@@ -18,19 +18,16 @@
         <hr />
 
         <div>
-            @Html.DisplayNameFor(model => model.Travel.Rating):
-            @Html.DisplayFor(model => model.RatingValue)
-        </div>
-
-        <div>
-            @Html.DisplayNameFor(model => model.Travel.Author.Email):
+            @Html.DisplayNameFor(model => model.Travel.Author):
             @Html.DisplayFor(model => model.Travel.Author.Email)
         </div>
+
         <hr />
         @Html.DisplayNameFor(model => model.Travel.AddressOfThePlace):
         @Html.DisplayFor(model => model.Travel.AddressOfThePlace)
 
         <p style="height:500px;width:100%;" id="map"></p>
+ 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1RbB__IUKO4_FFy5NL82TYbsl1fl8Y-Y">
         </script>
 
@@ -62,7 +59,10 @@
     var geocoder = new google.maps.Geocoder();
     var address = "@Model.Travel.AddressOfThePlace";
 
-    alert(address);
+
+
+
+    
     // Używamy GeocodingAPI w celu zmiany adresu na dane geograficzne
     // Długość i szerokość geograficzną pozwalają na zaznacznie 'lokalizacji' na mapie
     geocoder.geocode({ 'address': address }, function (results, status) {
@@ -76,22 +76,22 @@
             // typy map: roadmap, satellite, hybrid oraz terrain
             // punkty startowe to pierwszy element kolekcji
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 14,
+                zoom: 7,
                 center: { lat: latitude, lng: longitude },
                 mapTypeId: 'terrain'
             });
 
-
             // Na nasza mapę naniesiemy teraz naszą "lokalizację"
-            var gdynia = { lat: latitude, lng: longitude };
+            var place = { lat: latitude, lng: longitude };
 
-            var marker = new google.maps.Marker({ position: gdynia, map: map });
+            new google.maps.Marker({ position: place, map: map });
 
         } else {
             debugger;
             console.log(results);
         }
     });
+
 
 
 </script>

@@ -97,10 +97,21 @@ namespace TravelUp.Data.DbQuery
 
             return oldItem;
         }
+        public async Task<List<Travel>> DeleteAllTravelsByAuthorId(string id)
+        {
+            var travelsToDelete = _dbCtx.AllTravels.Where(c => c.Author.Id == id).ToList();
+            foreach(var travel in travelsToDelete)
+            {
+                _dbCtx.AllTravels.Remove(travel);
+            }
+            await SaveChangesAsync();
+            return travelsToDelete;
+        }
         public async Task SaveChangesAsync()
         {
             await _dbCtx.SaveChangesAsync();
         }
+
 
     }
 }

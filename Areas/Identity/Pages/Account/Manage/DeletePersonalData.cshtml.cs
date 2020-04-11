@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using TravelUp.Data.DbQuery;
+using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
 
 namespace TravelUp.Areas.Identity.Pages.Account.Manage
@@ -14,15 +16,18 @@ namespace TravelUp.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
+        private readonly IDbTravelQueries _dbT;
 
         public DeletePersonalDataModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<DeletePersonalDataModel> logger,
+            IDbTravelQueries dbTravelQueries)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _dbT = dbTravelQueries;
         }
 
         [BindProperty]
@@ -66,9 +71,10 @@ namespace TravelUp.Areas.Identity.Pages.Account.Manage
                     return Page();
                 }
             }
+            var userId = await _userManager.GetUserIdAsync(user);
+            await _dbT.DeleteAllTravelsByAuthorId(userId);
 
             var result = await _userManager.DeleteAsync(user);
-            var userId = await _userManager.GetUserIdAsync(user);
             if (!result.Succeeded)
             {
                 throw new InvalidOperationException($"Unexpected error occurred deleting user with ID '{userId}'.");

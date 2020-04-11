@@ -27,6 +27,8 @@ namespace TravelUp.Data
                         .HasOne(c => c.Rating);
             modelBuilder.Entity<Travel>()
                         .HasOne(c => c.Author);
+                        
+                        
 
             modelBuilder.Entity<Travel>()
                         .HasOne(c => c.Rating);
@@ -52,19 +54,6 @@ namespace TravelUp.Data
                         .IsRequired();
 
 
-
-            /*            modelBuilder.Entity<Travel>()
-                                    .ToTable("Travels");
-
-
-
-            *//*           *//*
-
-                        modelBuilder.Entity<Travel>()
-                                    .HasOne(c => c.Rating);
-
- */
-
             #endregion
 
             #region Rating
@@ -84,6 +73,7 @@ namespace TravelUp.Data
                         .HasOne<User>(c => c.User)
                         .WithMany(c => c.OnFavouriteList)
                         .HasForeignKey(c => c.UserId);
+            
 
             modelBuilder.Entity<TravelUserFavouriteList>()
                         .HasOne<Travel>(c => c.Travel)
