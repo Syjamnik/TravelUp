@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelUp.Data.DbQuery;
 using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
 using TravelUp.Services;
+using TravelUp.Services.AuxilaryClasses;
+using TravelUp.Utility;
 
 namespace TravelUp.Pages.Travels
 {
@@ -20,13 +24,15 @@ namespace TravelUp.Pages.Travels
         private readonly IDbUserQueries _dbU;
         private readonly UserManager<IdentityUser> userManager;
         private readonly ICalculateRating ratingCalc;
+        private readonly IImageManager _imageManager;
 
         public DetailsModel(IDbTravelQueries dbTravelQueries,
                             IDbFavouriteMTMQueries dbFavouriteMTMQueries,
                             IDbVisitedMTMQueries dbVisitedMTMQueries,
                             IDbUserQueries dbUserQueries,
                             UserManager<IdentityUser> userManager,
-                            ICalculateRating calculateRating)
+                            ICalculateRating calculateRating,
+                            IImageManager imageManager)
         {
 
             _db = dbTravelQueries;
@@ -35,11 +41,12 @@ namespace TravelUp.Pages.Travels
             _dbU = dbUserQueries;
             this.userManager = userManager;
             ratingCalc = calculateRating;
+            _imageManager = imageManager;
         }
 
         public Travel Travel { get; set; }
         public double RatingValue { get; set; }
-
+        public List<string> ImageAddresses { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id, int? addTo)
         {
             if (id == null)
@@ -48,6 +55,7 @@ namespace TravelUp.Pages.Travels
             }
 
             Travel = _db.Read(id.GetValueOrDefault());
+            ImageAddresses = _imageManager.LoadUploadedFileAddresses(Travel.ImagesAddr);
             if (Travel == null)
             {
                 return NotFound();
@@ -72,7 +80,7 @@ namespace TravelUp.Pages.Travels
 
             return Page();
         }
-
+        [Authorize(Roles = StaticDetails.AdminAndUser)]
         private async Task addToVisitedOrFavurite(int? addTo, User user)
         {
             // we want the user to stay on the same page

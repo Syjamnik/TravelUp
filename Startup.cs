@@ -12,6 +12,7 @@ using TravelUp.Data.DbQuery;
 using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Email;
 using TravelUp.Services;
+using TravelUp.Services.AuxilaryClasses;
 
 namespace TravelUp
 {
@@ -71,6 +72,7 @@ namespace TravelUp
             services.AddSingleton<IEmailSender, EmailSender>();
             services.Configure<EmailOptions>(Configuration);
             services.AddSingleton<ICalculateRating, CalculateRating>();
+            services.AddSingleton<IImageManager, ImageManager>();
 
 
 

@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
+using TravelUp.Utility;
 
 namespace TravelUp.Pages.Travels
 {
+    [Authorize(Roles = StaticDetails.AdminAndUser)]
     public class CreatedTravelsModel : PageModel
     {
 

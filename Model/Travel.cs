@@ -20,6 +20,7 @@ namespace TravelUp.Model
         [Required]
         public string AddressOfThePlace { get; set; }
         public Rating Rating { get; } = new Rating();
+        public string ImagesAddr { get; set; }
         public IList<TravelUserVisitedList> OnVisitedList { get; set; } = new List<TravelUserVisitedList>();
         public IList<TravelUserFavouriteList> OnFavouriteList { get; set; } = new List<TravelUserFavouriteList>();
         public Travel()

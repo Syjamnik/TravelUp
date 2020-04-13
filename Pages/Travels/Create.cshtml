@@ -11,7 +11,8 @@
 <hr />
 <div class="row">
     <div class="col-md-10">
-        <form method="post">
+
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Travel.Header" class="control-label"></label>
@@ -22,6 +23,11 @@
                 <label asp-for="Travel.AddressOfThePlace" class="control-label"></label>
                 <input asp-for="Travel.AddressOfThePlace" class="form-control" />
                 <span asp-validation-for="Travel.AddressOfThePlace" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Images" class="control-label"></label>
+                <input asp-for="Images" class="form-control" />
+                <span asp-validation-for="Images" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Travel.Text" class="control-label"></label>
@@ -36,6 +42,7 @@
 
                 <span asp-validation-for="Travel.Text" class="text-danger"></span>
             </div>
+
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

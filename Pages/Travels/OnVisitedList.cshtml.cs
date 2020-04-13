@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
@@ -7,9 +8,11 @@ using System.Threading.Tasks;
 using TravelUp.Data.DbQuery;
 using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
+using TravelUp.Utility;
 
 namespace TravelUp.Pages.Travels
 {
+    [Authorize(Roles = StaticDetails.AdminAndUser)]
     public class OnVisitedListModel : PageModel
     {
         private readonly IDbUserQueries _db;

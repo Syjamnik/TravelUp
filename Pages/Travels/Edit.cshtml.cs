@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 using TravelUp.Data.DbQuery;
 using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
+using TravelUp.Utility;
 
 namespace TravelUp.Pages.Travels
 {
+    [Authorize(Roles = StaticDetails.AdminAndUser)]
     public class EditModel : PageModel
     {
         private readonly IDbTravelQueries _db;

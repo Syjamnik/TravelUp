@@ -45,7 +45,8 @@
                 { "addTo", "2" }
             };
         }
-        @if (User.IsInRole(StaticDetails.Admin) || User.IsInRole(StaticDetails.Admin)) {
+        @if (User.IsInRole(StaticDetails.Admin) || User.IsInRole(StaticDetails.Admin))
+        {
             <a class="btn btn-primary" asp-page="./Details" asp-route-id="@Model.Travel.Id" asp-all-route-data="favoriteList">Add to Favourite list</a>
             <a class="btn btn-primary" asp-page="./Details" asp-route-id="@Model.Travel.Id" asp-all-route-data="visitedList">Add to Visited list</a>
         }
@@ -55,15 +56,28 @@
     <a asp-page="./Index">Back to List</a>
 </div>
 
-<script type="text/javascript">
+<style>
 
+    .galleryImage {
+        width: 20%;
+        height: 15%;
+    }
+</style>
+
+@if (Model.ImageAddresses != null)
+{
+        @foreach (var item in Model.ImageAddresses)
+        {
+            <a href="~/Images/@item">
+                <img src="~/Images/@item" class="galleryImage">
+            </a>
+        }
+}
+
+
+<script type="text/javascript">
     var geocoder = new google.maps.Geocoder();
     var address = "@Model.Travel.AddressOfThePlace";
-
-
-
-
-    
     // Używamy GeocodingAPI w celu zmiany adresu na dane geograficzne
     // Długość i szerokość geograficzną pozwalają na zaznacznie 'lokalizacji' na mapie
     geocoder.geocode({ 'address': address }, function (results, status) {
@@ -74,8 +88,6 @@
             //alert("szerokosc: " + latitude + "\ndlugosc: " + longitude);
 
             // tworzymy instancję nowej mapy z odpowiednim powiększeniem, punktem centralnym i typem mapy:
-            // typy map: roadmap, satellite, hybrid oraz terrain
-            // punkty startowe to pierwszy element kolekcji
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 7,
                 center: { lat: latitude, lng: longitude },

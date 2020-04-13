@@ -5,15 +5,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using TravelUp.Data.DbQuery.AuxiliaryClasses;
 using TravelUp.Model;
+using TravelUp.Services.AuxilaryClasses;
 
 namespace TravelUp.Data.DbQuery
 {
     public class DbTravelQueries: IDbTravelQueries
     {
         private ApplicationDbContext _dbCtx;
-        public DbTravelQueries(ApplicationDbContext dbCtx)
+        private IImageManager _imageManager;
+        public DbTravelQueries(ApplicationDbContext dbCtx, IImageManager imageManager)
         {
-            this._dbCtx = dbCtx;
+            _dbCtx = dbCtx;
+            _imageManager = imageManager;
         }
         public async Task<Travel> Create(Travel item)
         {
@@ -31,7 +34,9 @@ namespace TravelUp.Data.DbQuery
             {
                 return null;
             }
+
             _dbCtx.AllTravels.Remove(travel);
+            _imageManager.DeleteUploadedFiles(travel.ImagesAddr);
             await SaveChangesAsync();
 
             return travel;
@@ -42,7 +47,9 @@ namespace TravelUp.Data.DbQuery
             if(item== null)
                 return null;
                    
-            _dbCtx.AllTravels.Remove(item);
+            var travelToDelete=_dbCtx.AllTravels.Remove(item);
+            _imageManager.DeleteUploadedFiles(item.ImagesAddr);
+
             await SaveChangesAsync();
 
             return item;
@@ -104,18 +111,22 @@ namespace TravelUp.Data.DbQuery
             foreach(var travel in travelsToDelete)
             {
                 _dbCtx.AllTravels.Remove(travel);
+                _imageManager.DeleteUploadedFiles(travel.ImagesAddr);
+
             }
             await SaveChangesAsync();
             return travelsToDelete;
         }
+        public List<Travel> ReadAllUserTravels(string id)
+        {
+            return _dbCtx.AllTravels.Where(c => c.Author.Id == id).ToList();
+        }
+
         public async Task SaveChangesAsync()
         {
             await _dbCtx.SaveChangesAsync();
         }
 
-        public List<Travel> ReadAllUserTravels(string id)
-        {
-            return _dbCtx.AllTravels.Where(c => c.Author.Id == id).ToList();
-        }
+
     }
 }
